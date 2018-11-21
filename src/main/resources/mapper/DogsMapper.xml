@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.im.mapper.DogsMapper" >
+  <resultMap id="BaseResultMap" type="com.im.pojo.Dogs" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="dog_id" property="dogId" jdbcType="INTEGER" />
+    <result column="dog_age" property="dogAge" jdbcType="INTEGER" />
+    <result column="dog_name" property="dogName" jdbcType="VARCHAR" />
+    <result column="dog_desc" property="dogDesc" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

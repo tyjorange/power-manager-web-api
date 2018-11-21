@@ -1,0 +1,17 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /web_api
+#自定义值
+myValue1: xixibaba
+myValue2: tiehanhan
+#引用自定义值
+content: "v1: ${myValue1}, v2: ${myValue2}"
+#配置写到类里
+dog:
+  v1: dev
+  v2: 10
+#日志等级
+logging:
+  level:
+    root: DEBUG
