@@ -26,8 +26,9 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-    private final static String HOST = "192.168.1.57";
-    private final static int PORT = 6379;
+    private final static String REDIS_HOST = "192.168.1.57";
+    private final static int REDIS_PORT = 6379;
+    private final static int REDIS_EXPIRE_TIME = 1800;
 //    private int timeout;
 //    private String password;
 
@@ -129,9 +130,9 @@ public class ShiroConfig {
      */
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
-        redisManager.setHost(HOST);
-        redisManager.setPort(PORT);
-        redisManager.setExpire(1800);// 配置缓存过期时间
+        redisManager.setHost(REDIS_HOST);
+        redisManager.setPort(REDIS_PORT);
+        redisManager.setExpire(REDIS_EXPIRE_TIME);// 配置缓存过期时间
 //        redisManager.setTimeout(timeout);
 //        redisManager.setPassword(password);
         return redisManager;
