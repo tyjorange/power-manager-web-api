@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.im.mapper.SignalsMapper" >
+  <resultMap id="BaseResultMap" type="com.im.pojo.Signals" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="signalsID" property="signalsid" jdbcType="BIGINT" />
+    <id column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="switchID" property="switchid" jdbcType="VARCHAR" />
+    <result column="signalsTypeID" property="signalstypeid" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="DOUBLE" />
+  </resultMap>
+</mapper>

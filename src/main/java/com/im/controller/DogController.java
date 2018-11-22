@@ -1,9 +1,9 @@
 package com.im.controller;
 
+import com.im.pojo.Admin;
 import com.im.resp.RespResult;
-import com.im.pojo.Dogs;
 import com.im.resp.RespResultEnum;
-import com.im.service.DogService;
+import com.im.service.AdminService;
 import com.im.resp.RespResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RestController
 public class DogController {
     @Autowired
-    private DogService dogService;
+    private AdminService adminService;
 
 
     /**
@@ -29,11 +29,11 @@ public class DogController {
      * @return HTTP返回值封装对象
      */
     @GetMapping(value = "/query_dog")
-    public RespResult queryDog(Dogs dog,
+    public RespResult queryDog(Admin dog,
                                @RequestParam(value = "page", required = false) Integer page,
                                @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         if (dog == null) {
-            dog = new Dogs();
+            dog = new Admin();
         }
         if (page == null) {
             page = 1;
@@ -41,7 +41,7 @@ public class DogController {
         if (pageSize == null) {
             pageSize = 5;
         }
-        return dogService.queryDogList(dog, page, pageSize);
+        return adminService.queryDogList(dog, page, pageSize);
     }
 
     /**
@@ -52,7 +52,7 @@ public class DogController {
      */
     @GetMapping(value = "/query_dog/{id}")
     public RespResult queryDogID(@PathVariable("id") Integer id) {
-        return dogService.queryDogById(id);
+        return adminService.queryDogById(id);
     }
 
 
@@ -64,11 +64,11 @@ public class DogController {
      * @return
      */
     @PostMapping(value = "/add_dog")
-    public RespResult addDog(@Valid Dogs dog, BindingResult bindingResult) {
+    public RespResult addDog(@Valid Admin dog, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return RespResultUtil.customError(RespResultEnum.WRONG_PARAMETER_VALUE, bindingResult.getFieldError().getDefaultMessage());//TODO
         }
-        return dogService.saveDog(dog);
+        return adminService.saveDog(dog);
     }
 
 
@@ -80,9 +80,9 @@ public class DogController {
      * @return
      */
     @PutMapping(value = "/dog/{id}")
-    public RespResult updateOne(@PathVariable("id") Integer id, Dogs dog) {
-        dog.setDogId(id);
-        return dogService.updateDog(dog);
+    public RespResult updateOne(@PathVariable("id") String id, Admin dog) {
+        dog.setId(id);
+        return adminService.updateDog(dog);
     }
 
     /**
@@ -92,7 +92,7 @@ public class DogController {
      */
     @DeleteMapping(value = "/dog/{id}")
     public RespResult deleteOne(@PathVariable("id") Integer id) {
-        return dogService.deleteDog(id);
+        return adminService.deleteDog(id);
     }
 
     /**
@@ -103,6 +103,6 @@ public class DogController {
      */
     @GetMapping(value = "/dog/judgeAge/{id}")
     public void judgeAge(@PathVariable("id") Integer id) throws Exception {
-        dogService.judgeAge(id);
+        adminService.judgeAge(id);
     }
 }

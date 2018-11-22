@@ -13,7 +13,7 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/dog_db"
+                        connectionURL="jdbc:mysql://localhost:3306/power_manager"
                         userId="root"
                         password="root">
         </jdbcConnection>
@@ -25,12 +25,35 @@
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
         <!-- 配置mapper对应的java映射 -->
-        <javaClientGenerator targetPackage="com.im.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
-        <table tableName="dogs"></table>
+        <javaClientGenerator targetPackage="com.im.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
         <table tableName="role_permissions"></table>
         <table tableName="user_role"></table>
-        <table tableName="web_user"></table>
+        <table tableName="admin"></table>
+        <table tableName="alarm"></table>
+        <table tableName="apex_day"></table>
+        <table tableName="apex_month"></table>
+        <table tableName="automation"></table>
+        <table tableName="collector"></table>
+        <table tableName="conditions"></table>
+        <table tableName="controller"></table>
+        <table tableName="electrical_equipment"></table>
+        <table tableName="fsu"></table>
+        <table tableName="operate_record"></table>
+        <table tableName="region"></table>
+        <table tableName="scene"></table>
+        <table tableName="scene_switch"></table>
+        <table tableName="signal_hour"></table>
+        <table tableName="signals"></table>
+        <table tableName="signals_new"></table>
+        <table tableName="signalstype"></table>
+        <table tableName="subregion"></table>
+        <table tableName="switch"></table>
+        <table tableName="switch_param"></table>
+        <table tableName="time_controller"></table>
+        <table tableName="time_of_use_pricing"></table>
+        <table tableName="user"></table>
+        <table tableName="user_collector"></table>
 
     </context>
 </generatorConfiguration>

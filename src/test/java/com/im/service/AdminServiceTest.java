@@ -1,7 +1,7 @@
 package com.im.service;
 
-import com.im.mapper.DogsMapper;
-import com.im.pojo.Dogs;
+import com.im.mapper.AdminMapper;
+import com.im.pojo.Admin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +19,25 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest
 @Transactional
 @Rollback
-public class DogServiceTest {
+public class AdminServiceTest {
     @Autowired
-    private DogsMapper mapper;
+    private AdminMapper mapper;
 
     @Test
     public void testSaveDog() throws Exception {
-        Dogs d = new Dogs();
-        d.setDogId(1);
-        d.setDogName("test");
-        d.setDogAge(17);
+        Admin d = new Admin();
+        d.setId("a12");
+        d.setUsername("test");
         int insert = mapper.insert(d);
         assertEquals(insert, 1);
     }
 
     @Test
     public void testUpdateDog() throws Exception {
-        Dogs d = new Dogs();
-        d.setDogId(3);
-        d.setDogName("test");
-        d.setDogAge(19);
+        Admin d = new Admin();
+        d.setId("ss");
+        d.setUsername("test");
+        d.setPassword("s");
         int i = mapper.updateByPrimaryKeySelective(d);
         assertEquals(i, 1);
     }

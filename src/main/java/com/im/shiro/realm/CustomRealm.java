@@ -1,11 +1,11 @@
 package com.im.shiro.realm;
 
+import com.im.mapper.AdminMapper;
 import com.im.mapper.RolePermissionsMapper;
 import com.im.mapper.UserRoleMapper;
-import com.im.mapper.WebUserMapper;
+import com.im.pojo.Admin;
 import com.im.pojo.RolePermissions;
 import com.im.pojo.UserRole;
-import com.im.pojo.WebUser;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -29,7 +29,7 @@ public class CustomRealm extends AuthorizingRealm {
     @Autowired
     private RolePermissionsMapper rolePermissionsMapper;
     @Autowired
-    private WebUserMapper webUserMapper;
+    private AdminMapper webUserMapper;
 
     /**
      * 授权
@@ -57,7 +57,7 @@ public class CustomRealm extends AuthorizingRealm {
     private Set<String> getRoles(String username) {
         Example example = new Example(UserRole.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("userName", username);
+        criteria.andEqualTo("username", username);
         List<UserRole> list = userRoleMapper.selectByExample(example);
         Set<String> roles = new HashSet<>();
         list.forEach(role -> roles.add(role.getRoleName()));
@@ -106,14 +106,14 @@ public class CustomRealm extends AuthorizingRealm {
      * @return
      */
     private String getPasswordByUsername(String username) {
-        Example example = new Example(WebUser.class);
+        Example example = new Example(Admin.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("userName", username);
-        List<WebUser> webUsers = webUserMapper.selectByExample(example);
+        criteria.andEqualTo("username", username);
+        List<Admin> webUsers = webUserMapper.selectByExample(example);
         if (webUsers.size() == 0) {
             throw new AuthenticationException();
         }
-        return webUsers.get(0).getPassWord();
+        return webUsers.get(0).getPassword();
     }
 
     private static final String SALT = "abc";
