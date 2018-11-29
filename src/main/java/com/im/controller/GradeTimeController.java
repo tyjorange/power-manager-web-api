@@ -5,6 +5,7 @@ import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;
 import com.im.service.GradeTimeService;
+import com.im.service.SwitchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +21,13 @@ public class GradeTimeController {
 
     @Autowired
     private GradeTimeService gradeTimeService;
+    @Autowired
+    private SwitchService switchService;
 
     @CrossOrigin
     @GetMapping(value = "/getSwitchs")
     public RespResult getSwitchs() {
-        List<Switch> switches = gradeTimeService.querySwitchList("");
+        List<Switch> switches = switchService.findAll();
         return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, switches);
     }
 
