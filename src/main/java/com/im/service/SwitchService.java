@@ -1,6 +1,8 @@
 package com.im.service;
 
 import com.im.mapper.SwitchMapper;
+import com.im.pojo.ApexDay;
+import com.im.pojo.Collector;
 import com.im.pojo.Switch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class SwitchService {
 
     @Autowired
     private SwitchMapper switchMapper;
+
 
     /**
      * 条件查询断路器列表
@@ -62,6 +65,24 @@ public class SwitchService {
         }
         Switch _switch = switchMapper.selectByPrimaryKey(switchID);
         return _switch;
+    }
+
+    /**
+     * 查询某集中器下的断路器列表
+     *
+     * @param collectorID 集中器ID
+     * @return 断路器列表
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Switch> findByCollectorID(String collectorID) {
+        if (collectorID == null || collectorID.isEmpty()) {
+            return null;
+        }
+        Example example = new Example(Switch.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("collectorid", collectorID);
+        List<Switch> switches = switchMapper.selectByExample(example);
+        return switches;
     }
 
 }
