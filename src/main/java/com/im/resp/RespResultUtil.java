@@ -55,4 +55,14 @@ public class RespResultUtil {
         result.setMsg(msg);
         return result;
     }
+
+    /**
+     * 自定义异常
+     *
+     * @param e
+     * @return
+     */
+    public static RespResult customError(RespResultEnum e) {
+        return customError(e, null);
+    }
 }
