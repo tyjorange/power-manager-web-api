@@ -84,7 +84,7 @@ public class LoginController {
     @CrossOrigin
     @RequestMapping(value = "/un_auth", method = RequestMethod.GET)
     public RespResult unAuth() {
-        return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED, RespResultEnum.UNAUTHORIZED.getMsg());
+        return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED);
     }
 
     /**
@@ -95,6 +95,6 @@ public class LoginController {
     @CrossOrigin
     @RequestMapping(value = "/auth/kickout", method = RequestMethod.GET)
     public RespResult kickOut() {
-        return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED, RespResultEnum.UNAUTHORIZED.getMsg());
+        return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED);
     }
 }
