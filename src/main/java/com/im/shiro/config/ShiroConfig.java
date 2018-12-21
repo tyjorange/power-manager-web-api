@@ -6,13 +6,14 @@ import com.im.shiro.filter.KickoutSessionControlFilter;
 import com.im.shiro.realm.CustomRealm;
 import com.im.shiro.session.CustomSessionManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -26,9 +27,12 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-    private final static String REDIS_HOST = "192.168.1.57";
-    private final static int REDIS_PORT = 6379;
-    private final static int REDIS_EXPIRE_TIME = 1800;
+    @Value("${redis-host}")
+    private String REDIS_HOST;
+    @Value("${redis-port}")
+    private Integer REDIS_PORT;
+    @Value("${redis-expire-time}")
+    private Integer REDIS_EXPIRE_TIME;
 //    private int timeout;
 //    private String password;
 

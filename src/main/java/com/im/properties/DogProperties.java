@@ -8,32 +8,33 @@ import org.springframework.stereotype.Component;
  * Created by vostor on 2018/10/25.
  */
 @Component
-@ConfigurationProperties(prefix = "dog")
+@ConfigurationProperties(prefix = "redis-conf")
 public class DogProperties {
-    private String v1;
-    private Integer v2;
+    private String REDIS_HOST;
+    private Integer REDIS_PORT;
+    private Integer REDIS_EXPIRE_TIME;
 
-    public String getV1() {
-        return v1;
+    public String getRedisHost() {
+        return REDIS_HOST;
     }
 
-    public void setV1(String v1) {
-        this.v1 = v1;
+    public void setRedisHost(String redisHost) {
+        REDIS_HOST = redisHost;
     }
 
-    public Integer getV2() {
-        return v2;
+    public Integer getRedisPort() {
+        return REDIS_PORT;
     }
 
-    public void setV2(Integer v2) {
-        this.v2 = v2;
+    public void setRedisPort(Integer redisPort) {
+        REDIS_PORT = redisPort;
     }
 
-    @Override
-    public String toString() {
-        return "DogProperties{" +
-                "v1='" + v1 + '\'' +
-                ", v2=" + v2 +
-                '}';
+    public Integer getRedisExpireTime() {
+        return REDIS_EXPIRE_TIME;
+    }
+
+    public void setRedisExpireTime(Integer redisExpireTime) {
+        REDIS_EXPIRE_TIME = redisExpireTime;
     }
 }

@@ -123,7 +123,7 @@ public class CustomRealm extends AuthorizingRealm {
      * @param args
      */
     public static void main(String[] args) {
-        Md5Hash md5Hash = new Md5Hash("123", SALT, hashIterations);//2eec117978b1dc23d460b68ff5897bca
+        Md5Hash md5Hash = new Md5Hash("admin", SALT, hashIterations);//2eec117978b1dc23d460b68ff5897bca
         System.out.println(md5Hash);
     }
 }
