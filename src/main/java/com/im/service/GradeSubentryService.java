@@ -1,9 +1,12 @@
 package com.im.service;
 
 import com.im.bean.StatisticsBean;
-import com.im.pojo.ApexMonth;
-import com.im.pojo.Collector;
-import com.im.pojo.Switch;
+import com.im.mapper.first.ApexDayMapper;
+import com.im.mapper.first.ApexMonthMapper;
+import com.im.mapper.first.CollectorMapper;
+import com.im.pojo.first.ApexMonth;
+import com.im.pojo.first.Collector;
+import com.im.pojo.first.Switch;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;

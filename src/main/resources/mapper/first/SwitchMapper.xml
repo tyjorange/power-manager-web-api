@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.im.mapper.SwitchMapper" >
-  <resultMap id="BaseResultMap" type="com.im.pojo.Switch" >
+  <resultMap id="BaseResultMap" type="com.im.pojo.first.Switch" >
     <!--
       WARNING - @mbg.generated
     -->

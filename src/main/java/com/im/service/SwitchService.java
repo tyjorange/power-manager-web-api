@@ -1,6 +1,7 @@
 package com.im.service;
 
-import com.im.pojo.Switch;
+import com.im.mapper.first.SwitchMapper;
+import com.im.pojo.first.Switch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

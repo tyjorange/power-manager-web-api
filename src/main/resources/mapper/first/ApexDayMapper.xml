@@ -15,7 +15,7 @@
 
   <!-- -->
 
-  <resultMap id="BaseResultMap" type="com.im.pojo.ApexDay" >
+  <resultMap id="BaseResultMap" type="com.im.pojo.first.ApexDay" >
     <!--
       WARNING - @mbg.generated
     -->

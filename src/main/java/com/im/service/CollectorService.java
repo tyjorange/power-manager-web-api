@@ -1,6 +1,7 @@
 package com.im.service;
 
-import com.im.pojo.Collector;
+import com.im.mapper.first.CollectorMapper;
+import com.im.pojo.first.Collector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

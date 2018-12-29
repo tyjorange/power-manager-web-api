@@ -1,8 +1,5 @@
 package com.im.bean;
 
-import com.im.pojo.Switch;
-
-import java.util.List;
 import java.util.Map;
 
 /**

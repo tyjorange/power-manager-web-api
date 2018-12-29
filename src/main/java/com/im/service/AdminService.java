@@ -2,7 +2,8 @@ package com.im.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.im.pojo.Admin;
+import com.im.mapper.first.AdminMapper;
+import com.im.pojo.first.Admin;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;

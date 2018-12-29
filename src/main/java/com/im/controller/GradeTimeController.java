@@ -1,6 +1,6 @@
 package com.im.controller;
 
-import com.im.pojo.Switch;
+import com.im.pojo.first.Switch;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;

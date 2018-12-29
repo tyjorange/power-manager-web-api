@@ -1,6 +1,6 @@
 package com.im.controller;
 
-import com.im.pojo.Admin;
+import com.im.pojo.first.Admin;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;
@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServlet;
 import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;

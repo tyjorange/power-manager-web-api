@@ -1,6 +1,6 @@
 package com.im.controller;
 
-import com.im.pojo.Admin;
+import com.im.pojo.first.Admin;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.service.AdminService;
