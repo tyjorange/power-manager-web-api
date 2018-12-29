@@ -1,12 +1,6 @@
 package com.im.service;
 
-import com.im.bean.GradeTime;
 import com.im.bean.StatisticsBean;
-import com.im.mapper.ApexDayMapper;
-import com.im.mapper.ApexMonthMapper;
-import com.im.mapper.CollectorMapper;
-import com.im.mapper.SwitchMapper;
-import com.im.pojo.ApexDay;
 import com.im.pojo.ApexMonth;
 import com.im.pojo.Collector;
 import com.im.pojo.Switch;

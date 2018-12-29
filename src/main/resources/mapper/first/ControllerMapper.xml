@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.im.mapper.ControllerMapper" >
+  <resultMap id="BaseResultMap" type="com.im.pojo.Controller" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="controllerID" property="controllerid" jdbcType="VARCHAR" />
+    <result column="targetID" property="targetid" jdbcType="VARCHAR" />
+    <result column="targetType" property="targettype" jdbcType="INTEGER" />
+    <result column="genTime" property="gentime" jdbcType="TIMESTAMP" />
+    <result column="cmdData" property="cmddata" jdbcType="INTEGER" />
+    <result column="runTime" property="runtime" jdbcType="TIMESTAMP" />
+    <result column="runCode" property="runcode" jdbcType="VARCHAR" />
+    <result column="runId" property="runid" jdbcType="INTEGER" />
+    <result column="runNo" property="runno" jdbcType="INTEGER" />
+    <result column="runResult" property="runresult" jdbcType="INTEGER" />
+    <result column="source" property="source" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

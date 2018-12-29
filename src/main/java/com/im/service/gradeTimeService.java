@@ -2,13 +2,8 @@ package com.im.service;
 
 import com.im.bean.GradeTime;
 import com.im.bean.StatisticsBean;
-import com.im.mapper.ApexDayMapper;
-import com.im.mapper.ApexMonthMapper;
-import com.im.mapper.SignalsMapper;
-import com.im.mapper.SwitchMapper;
 import com.im.pojo.ApexDay;
 import com.im.pojo.ApexMonth;
-import com.im.pojo.Signals;
 import com.im.pojo.Switch;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
@@ -16,7 +11,6 @@ import com.im.resp.RespResultUtil;
 import com.im.resp.RespTableCol;
 import com.im.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.xml.DocumentDefaultsDefinition;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.DoubleBinaryOperator;
 
 /**
  * 分级分时统计

@@ -2,11 +2,9 @@ package com.im.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.im.mapper.AdminMapper;
 import com.im.pojo.Admin;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
-import com.im.exception.CustomException;
 import com.im.resp.RespResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

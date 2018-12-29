@@ -1,8 +1,5 @@
 package com.im.shiro.realm;
 
-import com.im.mapper.AdminMapper;
-import com.im.mapper.RolePermissionsMapper;
-import com.im.mapper.UserRoleMapper;
 import com.im.pojo.Admin;
 import com.im.pojo.RolePermissions;
 import com.im.pojo.UserRole;
@@ -41,9 +38,11 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        Set<String> roles = getRoles(username);
+        Set<String> roles = this.getRoles(username);
+        System.out.println(roles);
         authorizationInfo.setRoles(roles);// 设置角色
-        Set<String> permissions = getPermissions(roles);
+        Set<String> permissions = this.getPermissions(roles);
+        System.out.println(permissions);
         authorizationInfo.addStringPermissions(permissions);//设置权限
         return authorizationInfo;
     }
@@ -57,7 +56,7 @@ public class CustomRealm extends AuthorizingRealm {
     private Set<String> getRoles(String username) {
         Example example = new Example(UserRole.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("username", username);
+        criteria.andEqualTo("userName", username);
         List<UserRole> list = userRoleMapper.selectByExample(example);
         Set<String> roles = new HashSet<>();
         list.forEach(role -> roles.add(role.getRoleName()));
@@ -123,7 +122,7 @@ public class CustomRealm extends AuthorizingRealm {
      * @param args
      */
     public static void main(String[] args) {
-        Md5Hash md5Hash = new Md5Hash("admin", SALT, hashIterations);//2eec117978b1dc23d460b68ff5897bca
+        Md5Hash md5Hash = new Md5Hash("admin", SALT, hashIterations);//22d70c2e5b86d3c9f25735ebbabf40af
         System.out.println(md5Hash);
     }
 }

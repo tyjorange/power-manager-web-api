@@ -45,13 +45,13 @@ public class RespResultUtil {
     /**
      * 自定义异常
      *
-     * @param e
+     * @param respResultEnume
      * @param msg
      * @return
      */
-    public static RespResult customError(RespResultEnum e, String msg) {
+    public static RespResult customError(RespResultEnum respResultEnume, String msg) {
         RespResult result = new RespResult();
-        result.setCode(e.getCode());
+        result.setCode(respResultEnume.getCode());
         result.setMsg(msg);
         return result;
     }

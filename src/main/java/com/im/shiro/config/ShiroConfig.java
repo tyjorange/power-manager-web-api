@@ -57,6 +57,7 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/js/**", "anon");
 //        filterChainDefinitionMap.put("/images/**", "anon");
         filterChainDefinitionMap.put("/auth/login", "anon");
+        filterChainDefinitionMap.put("/auth/info", "anon");
         filterChainDefinitionMap.put("/auth/logout", "authc");
         filterChainDefinitionMap.put("/auth/kickout", "anon");
         filterChainDefinitionMap.put("/**", "authc,kickout");
@@ -72,8 +73,8 @@ public class ShiroConfig {
     @Bean
     public KickoutSessionControlFilter kickoutSessionControlFilter() {
         KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
-        kickoutSessionControlFilter.setCacheManager(cacheManager());
-        kickoutSessionControlFilter.setSessionManager(sessionManager());
+        kickoutSessionControlFilter.setCacheManager(this.cacheManager());
+        kickoutSessionControlFilter.setSessionManager(this.sessionManager());
         kickoutSessionControlFilter.setKickoutAfter(false);
         kickoutSessionControlFilter.setMaxSession(1);
         kickoutSessionControlFilter.setKickoutUrl("/auth/kickout");
@@ -97,7 +98,7 @@ public class ShiroConfig {
     @Bean
     public CustomRealm myShiroRealm() {
         CustomRealm customRealm = new CustomRealm();
-        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        customRealm.setCredentialsMatcher(this.hashedCredentialsMatcher());
         return customRealm;
     }
 
@@ -105,11 +106,11 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
         // 自定义session管理 使用redis
-        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(this.sessionManager());
         // 自定义缓存实现 使用redis
-        securityManager.setCacheManager(cacheManager());
+        securityManager.setCacheManager(this.cacheManager());
+        securityManager.setRealm(this.myShiroRealm());//放在最后一行，否则会产生不授权的问题
         return securityManager;
     }
 
@@ -119,7 +120,7 @@ public class ShiroConfig {
         CustomSessionManager customSessionManager = new CustomSessionManager();
         // 删除无效session
         customSessionManager.setDeleteInvalidSessions(true);
-        customSessionManager.setSessionDAO(redisSessionDAO());
+        customSessionManager.setSessionDAO(this.redisSessionDAO());
         //取消url 后面的 JSESSIONID
         customSessionManager.setSessionIdUrlRewritingEnabled(false);
         return customSessionManager;
@@ -152,7 +153,7 @@ public class ShiroConfig {
     @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
-        redisCacheManager.setRedisManager(redisManager());
+        redisCacheManager.setRedisManager(this.redisManager());
         return redisCacheManager;
     }
 
@@ -164,7 +165,7 @@ public class ShiroConfig {
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
-        redisSessionDAO.setRedisManager(redisManager());
+        redisSessionDAO.setRedisManager(this.redisManager());
         return redisSessionDAO;
     }
 

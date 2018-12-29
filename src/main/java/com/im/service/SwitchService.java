@@ -1,8 +1,5 @@
 package com.im.service;
 
-import com.im.mapper.SwitchMapper;
-import com.im.pojo.ApexDay;
-import com.im.pojo.Collector;
 import com.im.pojo.Switch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

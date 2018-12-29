@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServlet;
 import javax.validation.Valid;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by vostor on 2018/11/14.
@@ -44,6 +46,8 @@ public class LoginController {
         try {
             Serializable sessionsId = subject.getSession().getId();
             subject.login(token);
+            System.out.println(subject.hasRole("admin"));
+            System.out.println(subject.isPermitted("user:delete"));
             logger.warn("Session=[{}] User=[{}] isLogin=[{}]", sessionsId, webUser.getUsername(), subject.isAuthenticated());
             return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, sessionsId);
         } catch (IncorrectCredentialsException e) {
@@ -56,6 +60,26 @@ public class LoginController {
             e.printStackTrace();
         }
         return RespResultUtil.success(RespResultEnum.AUTH_FAILED);
+    }
+
+    /**
+     * 获取info
+     *
+     * @param
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/auth/info", method = RequestMethod.GET)
+    public RespResult ajaxLogin(@RequestParam(value = "token", required = false) String token) {
+        System.out.println(token);
+        HashMap<String, Object> map = new HashMap<>();
+        ArrayList<String> list = new ArrayList<>();
+        list.add("cat");
+        list.add("dog");
+        map.put("roles", list);
+        map.put("name", "ad_name");
+        map.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, map);
     }
 
     /**

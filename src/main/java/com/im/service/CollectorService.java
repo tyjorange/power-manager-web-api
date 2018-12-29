@@ -1,6 +1,5 @@
 package com.im.service;
 
-import com.im.mapper.CollectorMapper;
 import com.im.pojo.Collector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

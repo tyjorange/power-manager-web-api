@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.im.mapper.FsuMapper" >
+  <resultMap id="BaseResultMap" type="com.im.pojo.Fsu" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="FSUID" property="fsuid" jdbcType="VARCHAR" />
+    <result column="SubRegionID" property="subregionid" jdbcType="VARCHAR" />
+    <result column="FSUCode" property="fsucode" jdbcType="VARCHAR" />
+    <result column="FSUName" property="fsuname" jdbcType="VARCHAR" />
+    <result column="FSULng" property="fsulng" jdbcType="DOUBLE" />
+    <result column="FSULat" property="fsulat" jdbcType="DOUBLE" />
+    <result column="FSULLTime" property="fsulltime" jdbcType="TIMESTAMP" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="CmdPort" property="cmdport" jdbcType="INTEGER" />
+    <result column="HeartbeatTime" property="heartbeattime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
