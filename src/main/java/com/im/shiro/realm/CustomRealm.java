@@ -18,7 +18,7 @@ import java.util.Set;
  * Created by vostor on 2018/11/14.
  */
 public class CustomRealm extends AuthorizingRealm {
-    //    private final static Logger logger = LoggerFactory.getLogger(CustomRealm.class);
+    private final static Logger logger = LoggerFactory.getLogger(CustomRealm.class);
     @Autowired
     private UserRolePermissionsService userRolePermissionsService;
 
@@ -50,13 +50,13 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) super.getAvailablePrincipal(principalCollection);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         Set<String> roles = userRolePermissionsService.getRoles(username);
-        System.out.println("aaaaa" + roles);
+        System.out.println("角色 " + roles);
         authorizationInfo.setRoles(roles);// 设置角色
-//        logger.warn("用户角色=[{}]", roles.toString());
+        logger.warn("角色=[{}]", roles.toString());
         Set<String> permissions = userRolePermissionsService.getPermissions(roles);
-        System.out.println("bbbbb" + permissions);
+        System.out.println("权限" + permissions);
         authorizationInfo.addStringPermissions(permissions);//设置权限
-//        logger.warn("角色权限=[{}]", permissions.toString());
+        logger.warn("权限=[{}]", permissions.toString());
         return authorizationInfo;
     }
 

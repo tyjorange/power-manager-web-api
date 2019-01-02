@@ -4,6 +4,7 @@ import com.im.pojo.first.Admin;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;
+import com.im.service.UserRolePermissionsService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -12,6 +13,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Created by vostor on 2018/11/14.
@@ -26,6 +29,8 @@ import java.util.HashMap;
 @RestController
 public class LoginController {
     private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
+    @Autowired
+    private UserRolePermissionsService userRolePermissionsService;
 
     /**
      * 登录方法
@@ -45,8 +50,6 @@ public class LoginController {
         try {
             Serializable sessionsId = subject.getSession().getId();
             subject.login(token);
-            System.out.println(subject.hasRole("admin"));
-            System.out.println(subject.isPermitted("user:delete"));
             logger.warn("Session=[{}] User=[{}] isLogin=[{}]", sessionsId, webUser.getUsername(), subject.isAuthenticated());
             return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, sessionsId);
         } catch (IncorrectCredentialsException e) {
@@ -64,21 +67,25 @@ public class LoginController {
     /**
      * 获取info
      *
-     * @param
+     * @param token
      * @return
      */
     @CrossOrigin
     @RequestMapping(value = "/auth/info", method = RequestMethod.GET)
     public RespResult ajaxLogin(@RequestParam(value = "token", required = false) String token) {
-        System.out.println(token);
+        Subject subject = SecurityUtils.getSubject();
+        Object principal = subject.getPrincipal();
+        if (principal == null) {
+            return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED);
+        }
+        Set<String> roles = userRolePermissionsService.getRoles(principal.toString());
         HashMap<String, Object> map = new HashMap<>();
-        ArrayList<String> list = new ArrayList<>();
-        list.add("cat");
-        list.add("dog");
-        map.put("roles", list);
-        map.put("name", "ad_name");
+        map.put("name", principal);
+        map.put("roles", roles);
+        map.put("permissions", userRolePermissionsService.getPermissions(roles));
         map.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, map);
+        logger.warn("token=[{}]", token);
+        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, map);
     }
 
     /**
@@ -100,7 +107,7 @@ public class LoginController {
 
 
     /**
-     * 登录页
+     * 未登录
      *
      * @return
      */

@@ -63,6 +63,6 @@ public class RespResultUtil {
      * @return
      */
     public static RespResult customError(RespResultEnum e) {
-        return customError(e, null);
+        return customError(e, e.getMsg());
     }
 }

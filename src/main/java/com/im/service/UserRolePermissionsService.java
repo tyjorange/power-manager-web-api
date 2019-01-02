@@ -3,7 +3,6 @@ package com.im.service;
 import com.im.mapper.second.*;
 import com.im.pojo.second.*;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.config.Interpolator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
