@@ -20,5 +20,6 @@
     <result column="fault" property="fault" jdbcType="INTEGER" />
     <result column="faultTime" property="faulttime" jdbcType="TIMESTAMP" />
     <result column="faultState" property="faultstate" jdbcType="INTEGER" />
+    <result column="switchType" property="switchtype" jdbcType="BIGINT" />
   </resultMap>
 </mapper>

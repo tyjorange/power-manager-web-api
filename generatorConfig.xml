@@ -13,7 +13,7 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/power_manager_user"
+                        connectionURL="jdbc:mysql://localhost:3306/power_manager"
                         userId="root"
                         password="root">
         </jdbcConnection>
@@ -27,11 +27,12 @@
         <!-- 配置mapper对应的java映射 -->
 
         <javaClientGenerator targetPackage="com.im.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
-        <table tableName="role"></table>
-        <table tableName="permissions"></table>
-        <table tableName="role_permissions"></table>
-        <table tableName="web_user"></table>
-        <table tableName="web_user_role"></table>
+        <!--<table tableName="role"></table>-->
+        <!--<table tableName="permissions"></table>-->
+        <!--<table tableName="role_permissions"></table>-->
+        <!--<table tableName="web_user"></table>-->
+        <!--<table tableName="web_user_role"></table>-->
+
         <!--<table tableName="admin"></table>-->
         <!--<table tableName="alarm"></table>-->
         <!--<table tableName="apex_day"></table>-->
@@ -51,7 +52,8 @@
         <!--<table tableName="signals_new"></table>-->
         <!--<table tableName="signalstype"></table>-->
         <!--<table tableName="subregion"></table>-->
-        <!--<table tableName="switch"></table>-->
+        <table tableName="switch"></table>
+        <table tableName="switchtype"></table>
         <!--<table tableName="switch_param"></table>-->
         <!--<table tableName="time_controller"></table>-->
         <!--<table tableName="time_of_use_pricing"></table>-->

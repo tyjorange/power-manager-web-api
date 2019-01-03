@@ -53,6 +53,9 @@ public class Switch {
     @Column(name = "faultState")
     private Integer faultstate;
 
+    @Column(name = "switchType")
+    private Long switchtype;
+
     /**
      * @return switchID
      */
@@ -273,5 +276,19 @@ public class Switch {
      */
     public void setFaultstate(Integer faultstate) {
         this.faultstate = faultstate;
+    }
+
+    /**
+     * @return switchType
+     */
+    public Long getSwitchtype() {
+        return switchtype;
+    }
+
+    /**
+     * @param switchtype
+     */
+    public void setSwitchtype(Long switchtype) {
+        this.switchtype = switchtype;
     }
 }
