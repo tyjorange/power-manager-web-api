@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.im.mapper.SignalHourMapper" >
+<mapper namespace="com.im.mapper.first.SignalHourMapper" >
+
+  <select id="gradeSubentry" resultType="com.im.bean.GradeSubentry" parameterType="java.lang.String">
+    <![CDATA[
+      select  c.code as collectorCode,c.name as collectorName,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 1 and c.code = #{collectorID}) as power,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 2 and c.code = #{collectorID}) as lighting,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 3 and c.code = #{collectorID}) as airConditioner,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 4 and c.code = #{collectorID}) as airPressure,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 5 and c.code = #{collectorID}) as elevator,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 6 and c.code = #{collectorID}) as live,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
+          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 7 and c.code = #{collectorID}) as special
+        from collector c where c.code = #{collectorID}
+     ]]>
+  </select>
+
   <resultMap id="BaseResultMap" type="com.im.pojo.first.SignalHour" >
     <!--
       WARNING - @mbg.generated

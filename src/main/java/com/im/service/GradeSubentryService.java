@@ -1,9 +1,11 @@
 package com.im.service;
 
+import com.im.bean.GradeSubentry;
 import com.im.bean.StatisticsBean;
 import com.im.mapper.first.ApexDayMapper;
 import com.im.mapper.first.ApexMonthMapper;
 import com.im.mapper.first.CollectorMapper;
+import com.im.mapper.first.SignalHourMapper;
 import com.im.pojo.first.ApexMonth;
 import com.im.pojo.first.Collector;
 import com.im.pojo.first.Switch;
@@ -11,16 +13,14 @@ import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;
 import com.im.resp.RespTableCol;
+import com.im.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 分级分项统计
@@ -32,6 +32,8 @@ public class GradeSubentryService {
     @Autowired
     private CollectorMapper collectorMapper;
     @Autowired
+    private SignalHourMapper signalHourMapper;
+    @Autowired
     private ApexDayMapper apexDayMapper;
     @Autowired
     private ApexMonthMapper apexMonthMapper;
@@ -39,7 +41,8 @@ public class GradeSubentryService {
     private SwitchService switchService;
 
     /**
-     * 分类分时统计
+     * 分级分项统计
+     *
      * @param collectorID
      * @param startTime
      * @param endTime
@@ -48,6 +51,47 @@ public class GradeSubentryService {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     public RespResult gradeSubentry(String collectorID, String startTime, String endTime, Integer timeType) {
+        List<Collector> collectors = new ArrayList<Collector>();
+        List<GradeSubentry> gradeSubentries = null;
+        if (collectorID == null || collectorID.isEmpty()) {
+            //获取所有在使用的集中器列表
+            collectors = collectorMapper.getUsedCollector();
+        } else {
+            Collector collector = collectorMapper.selectByPrimaryKey(collectorID);
+            collectors.add(collector);
+        }
+        if (collectors != null && collectors.size() != 0) {
+            gradeSubentries = new ArrayList<GradeSubentry>();
+            GradeSubentry gradeSubentry = null;
+            for (Collector collector : collectors) {
+                if (timeType == 1) {    //按月查询
+                    String year = startTime.split("-")[0];
+                    String month = startTime.split("-")[1];
+                    startTime = DateUtil.getFisrtDayOfMonth(year, month);
+                    endTime = DateUtil.getDateLastDay(year, month);
+                } else if (timeType == 2) {  //按年查询
+                    int year = Integer.parseInt(startTime);
+                    startTime = DateUtil.getYearFirst(year);
+                    endTime = DateUtil.getYearLast(year);
+                }
+                gradeSubentry = signalHourMapper.gradeSubentry(startTime, endTime, collector.getCode());
+                gradeSubentries.add(gradeSubentry);
+            }
+        }
+        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, gradeSubentries);
+    }
+
+    /**
+     * 分类分时统计
+     *
+     * @param collectorID
+     * @param startTime
+     * @param endTime
+     * @param timeType
+     * @return
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public RespResult gradeSubentry1(String collectorID, String startTime, String endTime, Integer timeType) {
         List<Switch> switches = null;
         StatisticsBean statisticsBean = new StatisticsBean();
         List<RespTableCol> cols = null;
@@ -83,7 +127,7 @@ public class GradeSubentryService {
                         // 查询该月内该断路器的有功电量
                         Integer year = Integer.parseInt(startTime.split("-")[0]);
                         Integer month = Integer.parseInt(startTime.split("-")[1]);
-                        Example  example = new Example(ApexMonth.class);
+                        Example example = new Example(ApexMonth.class);
                         Example.Criteria criteria = example.createCriteria();
                         criteria.andEqualTo("signalstypeid", "ygdl");
                         criteria.andEqualTo("switchid", _switch.getSwitchid());
@@ -106,7 +150,6 @@ public class GradeSubentryService {
     }
 
     /**
-     *
      * @param switchID
      * @param signalsType
      * @param startTime
@@ -114,7 +157,7 @@ public class GradeSubentryService {
      * @return
      */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public Double apexDayStatistics(String switchID,String signalsType, String startTime, String endTime) {
+    public Double apexDayStatistics(String switchID, String signalsType, String startTime, String endTime) {
         return apexDayMapper.getMaxSum(switchID, signalsType, startTime, endTime);
     }
 
