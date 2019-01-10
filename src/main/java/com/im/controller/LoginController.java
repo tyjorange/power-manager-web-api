@@ -51,7 +51,7 @@ public class LoginController {
             Serializable sessionsId = subject.getSession().getId();
             subject.login(token);
             logger.warn("Session=[{}] User=[{}] isLogin=[{}]", sessionsId, webUser.getUsername(), subject.isAuthenticated());
-            return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, sessionsId);
+            return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, null);
         } catch (IncorrectCredentialsException e) {
             return RespResultUtil.success(RespResultEnum.AUTH_FAILED);
         } catch (LockedAccountException e) {
