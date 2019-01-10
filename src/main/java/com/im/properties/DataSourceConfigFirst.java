@@ -55,7 +55,7 @@ public class DataSourceConfigFirst {
 
     @Primary
     @Bean(name = "firstTransactionManager")
-    public DataSourceTransactionManager setTransactionManager(@Qualifier("firstDataSource") DruidDataSource dataSource) {
+    public DataSourceTransactionManager setTransactionManager(@Qualifier("firstDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
