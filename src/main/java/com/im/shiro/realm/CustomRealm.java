@@ -50,11 +50,9 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) super.getAvailablePrincipal(principalCollection);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         Set<String> roles = userRolePermissionsService.getRoles(username);
-        System.out.println("角色 " + roles);
         authorizationInfo.setRoles(roles);// 设置角色
         logger.warn("角色=[{}]", roles.toString());
         Set<String> permissions = userRolePermissionsService.getPermissions(roles);
-        System.out.println("权限" + permissions);
         authorizationInfo.addStringPermissions(permissions);//设置权限
         logger.warn("权限=[{}]", permissions.toString());
         return authorizationInfo;

@@ -36,6 +36,12 @@ public class SwitchController {
     @CrossOrigin
     @RequestMapping(value = "/get/switchs", method = RequestMethod.GET)
     public RespResult getSwitch(String collectorId) {
+        if (collectorId == null) {
+            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
+        }
+        if (collectorId.isEmpty()) {
+            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_VALUE);
+        }
         List<Switch> list_1 = switchService.findByCollectorID(collectorId);
         list_1.forEach(aSwitch -> aSwitch.setCollectorid(collectorService.findByID(aSwitch.getCollectorid()).getName()));
         return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, list_1);

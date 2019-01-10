@@ -5,6 +5,8 @@ import com.im.pojo.second.*;
 import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashSet;
@@ -33,6 +35,7 @@ public class UserRolePermissionsService {
      * @param webUsername
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     public String getPasswordByUsername(String webUsername) {
         Example example = new Example(WebUser.class);
         Example.Criteria criteria = example.createCriteria();
@@ -50,6 +53,7 @@ public class UserRolePermissionsService {
      * @param webUserName
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Set<String> getRoles(String webUserName) {
         Example example = new Example(WebUserRole.class);
         Example.Criteria criteria = example.createCriteria();
@@ -66,6 +70,7 @@ public class UserRolePermissionsService {
      * @param roles
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Set<String> getPermissions(Set<String> roles) {
         Set<String> permissions = new HashSet<>();
         roles.forEach(roleName -> {
@@ -84,6 +89,7 @@ public class UserRolePermissionsService {
      * @param permissionsId
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     private String getPermissionsName(Integer permissionsId) {
         Permissions permissions = permissionsMapper.selectByPrimaryKey(permissionsId);
         return permissions.getPermissionsName();
@@ -95,6 +101,7 @@ public class UserRolePermissionsService {
      * @param webUserName
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     private Integer getWebUserId(String webUserName) {
         Example example = new Example(WebUser.class);
         Example.Criteria criteria = example.createCriteria();
@@ -109,6 +116,7 @@ public class UserRolePermissionsService {
      * @param roleId
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     private String getRoleName(Integer roleId) {
         Role role = roleMapper.selectByPrimaryKey(roleId);
         return role.getRoleName();
@@ -120,6 +128,7 @@ public class UserRolePermissionsService {
      * @param roleName
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS)
     private Integer getRoleId(String roleName) {
         Example example = new Example(Role.class);
         Example.Criteria criteria = example.createCriteria();
