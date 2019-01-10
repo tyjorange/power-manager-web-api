@@ -24,6 +24,7 @@ import java.util.Properties;
 @Configuration
 @MapperScan(basePackages = "com.im.mapper.first", sqlSessionTemplateRef = "firstSqlSessionTemplate")
 public class DataSourceConfigFirst {
+
     @Primary
     @Bean(name = "firstDataSource", destroyMethod = "close", initMethod = "init")
     @ConfigurationProperties(prefix = "spring.datasource.first")

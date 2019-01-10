@@ -22,6 +22,7 @@ import java.util.Properties;
 @Configuration
 @MapperScan(basePackages = "com.im.mapper.second", sqlSessionTemplateRef = "secondSqlSessionTemplate")
 public class DataSourceConfigSecond {
+
     @Bean(name = "secondDataSource", destroyMethod = "close", initMethod = "init")
     @ConfigurationProperties(prefix = "spring.datasource.second")
     public DruidDataSource setDataSource() throws SQLException {
