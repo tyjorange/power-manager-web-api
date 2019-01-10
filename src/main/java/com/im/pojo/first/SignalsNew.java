@@ -90,4 +90,12 @@ public class SignalsNew {
     public void setValue(Double value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "SignalsNew{" +
+                "switchid='" + switchid + '\'' +
+                ", signalstypeid='" + signalstypeid + '\'' +
+                '}';
+    }
 }

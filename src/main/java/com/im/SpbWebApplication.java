@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.im.mapper")
+//@MapperScan({"com.im.mapper.first", "com.im.mapper.second"})
 //@EnableScheduling
 public class SpbWebApplication {
 

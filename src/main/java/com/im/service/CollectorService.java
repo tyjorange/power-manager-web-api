@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -38,6 +39,20 @@ public class CollectorService {
     @Transactional(propagation = Propagation.SUPPORTS)
     public Collector findByID(String collectorID) {
         return collectorMapper.selectByPrimaryKey(collectorID);
+    }
+
+    /**
+     * 根据ID查询集中器信息
+     *
+     * @param fsuID 集中器ID
+     * @return 集中器信息
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Collector> findByFsuID(String fsuID) {
+        Example example = new Example(Collector.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fsuid", fsuID);
+        return collectorMapper.selectByExample(example);
     }
 
 }
