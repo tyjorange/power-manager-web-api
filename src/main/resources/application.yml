@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev2 #加载不同配置文件
+    active: dev #加载不同配置文件
 mybatis:
     type-aliases-package: com.im.pojo
     mapper-locations: classpath:mapper/*.xml

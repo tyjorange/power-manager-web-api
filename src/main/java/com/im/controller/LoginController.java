@@ -72,7 +72,7 @@ public class LoginController {
      */
     @CrossOrigin
     @RequestMapping(value = "/auth/info", method = RequestMethod.GET)
-    public RespResult ajaxLogin(@RequestParam(value = "token", required = false) String token) {
+    public RespResult getInfo(@RequestParam(value = "token", required = false) String token) {
         Subject subject = SecurityUtils.getSubject();
         Object principal = subject.getPrincipal();
         if (principal == null) {
