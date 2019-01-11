@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.initialSize",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.initialSize."
+    },
+    {
+      "name": "spring.datasource.maxActive",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.maxActive."
+    },
+    {
+      "name": "redis-host",
+      "type": "java.lang.String",
+      "description": "Description for redis-host."
+    }
+  ]
+}
