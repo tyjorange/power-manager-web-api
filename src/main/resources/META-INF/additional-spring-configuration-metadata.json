@@ -14,6 +14,121 @@
       "name": "redis-host",
       "type": "java.lang.String",
       "description": "Description for redis-host."
+    },
+    {
+      "name": "redis-port",
+      "type": "java.lang.String",
+      "description": "Description for redis-port."
+    },
+    {
+      "name": "redis-expire-time",
+      "type": "java.lang.String",
+      "description": "Description for redis-expire-time."
+    },
+    {
+      "name": "spring.datasource.maxWait",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.maxWait."
+    },
+    {
+      "name": "spring.datasource.timeBetweenEvictionRunsMillis",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.timeBetweenEvictionRunsMillis."
+    },
+    {
+      "name": "spring.datasource.minEvictableIdleTimeMillis",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.minEvictableIdleTimeMillis."
+    },
+    {
+      "name": "spring.datasource.minIdle",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.minIdle."
+    },
+    {
+      "name": "spring.datasource.validationQuery",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.validationQuery."
+    },
+    {
+      "name": "spring.datasource.testWhileIdle",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.testWhileIdle."
+    },
+    {
+      "name": "spring.datasource.testOnBorrow",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.testOnBorrow."
+    },
+    {
+      "name": "spring.datasource.testOnReturn",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.testOnReturn."
+    },
+    {
+      "name": "spring.datasource.poolPreparedStatements",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.poolPreparedStatements."
+    },
+    {
+      "name": "spring.datasource.filters",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.filters."
+    },
+    {
+      "name": "spring.datasource.slowSqlMillis",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.slowSqlMillis."
+    },
+    {
+      "name": "spring.datasource.logSlowSql",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.logSlowSql."
+    },
+    {
+      "name": "spring.datasource.mergeSql",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.mergeSql."
+    },
+    {
+      "name": "spring.datasource.first.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.first.driver-class-name."
+    },
+    {
+      "name": "spring.datasource.first.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.first.url."
+    },
+    {
+      "name": "spring.datasource.first.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.first.username."
+    },
+    {
+      "name": "spring.datasource.first.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.first.password."
+    },
+    {
+      "name": "spring.datasource.second.driver-class-name",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.second.driver-class-name."
+    },
+    {
+      "name": "spring.datasource.second.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.second.url."
+    },
+    {
+      "name": "spring.datasource.second.username",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.second.username."
+    },
+    {
+      "name": "spring.datasource.second.password",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.second.password."
     }
   ]
 }

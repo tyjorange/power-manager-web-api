@@ -13,7 +13,7 @@ public class StatisticsBean {
     private List<Map<String, String>> datas;    //分类分时统计结果列表
     private List<GradeTime> tableData; //分级分时统计结果列表
 
-                                                            public List<Map<String, String>> getDatas() {
+    public List<Map<String, String>> getDatas() {
         return datas;
     }
 
