@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 历史信号表
  * Created by vostor on 2019/1/14.
  */
 @RestController
@@ -33,7 +35,7 @@ public class SignalsController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/signal_his", method = RequestMethod.GET)
-    public RespResult getSignalHis(String param_1, String param_2, Long startTime, Long endTime) {
+    public RespResult getSignalHis(String param_1, String param_2, String startTime, String endTime) throws ParseException {
         if (param_1 == null || param_2 == null || startTime == null || endTime == null) {
             return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
         }

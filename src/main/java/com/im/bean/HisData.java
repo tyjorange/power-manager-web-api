@@ -1,13 +1,20 @@
 package com.im.bean;
 
+import java.sql.Timestamp;
+
 /**
  * 历史数据表.行数据-实体
  * Created by vostor on 2019/1/14.
  */
 public class HisData {
+    private String switchID;
     private String switchName;
-    private String collectorName;
+    private String signalsID;
     private String signalsTypeName;
+    private String collectorId;
+    private String collectorName;
+    private Timestamp time;// 采集时间 yyyy-mm-dd hh:mm:ss
+    private Long dataTime; //采集时间 ms
     private Double ygdl;//有功电量
     private Double wgdl;//无功电量
     private Double yggl;//有功功率
@@ -17,6 +24,56 @@ public class HisData {
     private Double dy;//电压
     private Double pl;//频率
     private Double wd;//温度
+    private Double dqywgdl;//当前月无功电量
+    private Double dqyygdl;//当前月有功电量
+
+    public String getSwitchID() {
+        return switchID;
+    }
+
+    public void setSwitchID(String switchID) {
+        this.switchID = switchID;
+    }
+
+    public String getSignalsID() {
+        return signalsID;
+    }
+
+    public void setSignalsID(String signalsID) {
+        this.signalsID = signalsID;
+    }
+
+    public String getCollectorId() {
+        return collectorId;
+    }
+
+    public void setCollectorId(String collectorId) {
+        this.collectorId = collectorId;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public Double getDqywgdl() {
+        return dqywgdl;
+    }
+
+    public void setDqywgdl(Double dqywgdl) {
+        this.dqywgdl = dqywgdl;
+    }
+
+    public Double getDqyygdl() {
+        return dqyygdl;
+    }
+
+    public void setDqyygdl(Double dqyygdl) {
+        this.dqyygdl = dqyygdl;
+    }
 
     public Double getGlys() {
         return glys;
@@ -58,13 +115,12 @@ public class HisData {
         this.wd = wd;
     }
 
-    private String dataTime; //采集时间
 
-    public String getDataTime() {
+    public Long getDataTime() {
         return dataTime;
     }
 
-    public void setDataTime(String dataTime) {
+    public void setDataTime(Long dataTime) {
         this.dataTime = dataTime;
     }
 

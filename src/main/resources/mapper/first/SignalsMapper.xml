@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.im.mapper.SignalsMapper" >
-  <resultMap id="BaseResultMap" type="com.im.pojo.first.Signals" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="signalsID" property="signalsid" jdbcType="BIGINT" />
-    <id column="time" property="time" jdbcType="TIMESTAMP" />
-    <result column="switchID" property="switchid" jdbcType="VARCHAR" />
-    <result column="signalsTypeID" property="signalstypeid" jdbcType="VARCHAR" />
-    <result column="value" property="value" jdbcType="DOUBLE" />
-  </resultMap>
+<mapper namespace="com.im.mapper.first.SignalsMapper">
+    <resultMap id="BaseResultMap" type="com.im.pojo.first.Signals">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="signalsID" property="signalsid" jdbcType="BIGINT"/>
+        <id column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="switchID" property="switchid" jdbcType="VARCHAR"/>
+        <result column="signalsTypeID" property="signalstypeid" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <select id="getSignalsByTimeAndId" resultType="com.im.bean.HisData" parameterType="java.lang.String">
+        SELECT
+            signals.signalsID,
+            signals.switchID,
+            signals.time,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'dl', signals.`value`, NULL))      AS dl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'dqywgdl', signals.`value`, NULL)) AS dqywgdl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'dqyygdl', signals.`value`, NULL)) AS dqyygdl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'dy', signals.`value`, NULL))      AS dy,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'glys', signals.`value`, NULL))    AS glys,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'pl', signals.`value`, NULL))      AS pl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'wd', signals.`value`, NULL))      AS wd,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'wgdl', signals.`value`, NULL))    AS wgdl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'wggl', signals.`value`, NULL))    AS wggl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'ygdl', signals.`value`, NULL))    AS ygdl,
+            GROUP_CONCAT(IF(signals.signalsTypeID = 'yggl', signals.`value`, NULL))    AS yggl
+        FROM
+            signals
+        WHERE
+            signals.switchID = #{switchID}
+            AND signals.time BETWEEN #{startTime}
+            AND #{endTime}
+        GROUP BY
+            signals.time
+    </select>
 </mapper>
