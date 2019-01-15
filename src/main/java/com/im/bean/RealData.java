@@ -8,12 +8,12 @@ public class RealData {
     private String switchName;
     private String collectorName;
     private String signalsTypeName;
-    private String fl;
-    private String bl;
+    private String fl; //费率
+    private String bl; //倍率
     private String dataValue;
-    private String dataUnit;
-    private String dataLoop;
-    private String dataTime;
+    private String dataUnit; //计量单位
+    private String dataLoop; //采集周期
+    private String dataTime; //采集时间
 
     public String getSwitchName() {
         return switchName;

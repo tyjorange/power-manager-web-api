@@ -25,7 +25,7 @@ public class GradeTimeController {
     private SwitchService switchService;
 
     @CrossOrigin
-    @GetMapping(value = "/getSwitchs")
+    @GetMapping(value = "/getSignalNew")
     public RespResult getSwitchs() {
         List<Switch> switches = switchService.findAll();
         return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, switches);

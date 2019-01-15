@@ -32,8 +32,13 @@ public class SignalsNewService {
     @Autowired
     private CollectorMapper collectorMapper;
 
+    /**
+     * @param switchs
+     * @param signalsTypes
+     * @return
+     */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public List<RealData> findBySignalsTypesAndSwitchs(List<String> switchs, List<String> signalsTypes) {
+    public List<RealData> findBySignalsNewTypesAndSwitchs(List<String> switchs, List<String> signalsTypes) {
         List<RealData> res = new ArrayList<>();
         switchs.forEach(switchid -> signalsTypes.forEach(signalstypeid -> {
             Example example = new Example(SignalsNew.class);
