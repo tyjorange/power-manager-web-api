@@ -12,29 +12,45 @@
         <result column="value" property="value" jdbcType="DOUBLE"/>
     </resultMap>
 
-    <select id="getSignalsByTimeAndId" resultType="com.im.bean.HisData" parameterType="java.lang.String">
+    <select id="getSignalsByTimeAndSwitch" resultType="com.im.bean.HisData" parameterType="java.lang.String">
         SELECT
-            signals.signalsID,
-            signals.switchID,
-            signals.time,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'dl', signals.`value`, NULL))      AS dl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'dqywgdl', signals.`value`, NULL)) AS dqywgdl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'dqyygdl', signals.`value`, NULL)) AS dqyygdl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'dy', signals.`value`, NULL))      AS dy,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'glys', signals.`value`, NULL))    AS glys,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'pl', signals.`value`, NULL))      AS pl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'wd', signals.`value`, NULL))      AS wd,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'wgdl', signals.`value`, NULL))    AS wgdl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'wggl', signals.`value`, NULL))    AS wggl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'ygdl', signals.`value`, NULL))    AS ygdl,
-            GROUP_CONCAT(IF(signals.signalsTypeID = 'yggl', signals.`value`, NULL))    AS yggl
+        signals.signalsID,
+        signals.switchID,
+        signals.time,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'dl', signals.`value`, NULL)) AS dl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'dqywgdl', signals.`value`, NULL)) AS dqywgdl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'dqyygdl', signals.`value`, NULL)) AS dqyygdl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'dy', signals.`value`, NULL)) AS dy,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'glys', signals.`value`, NULL)) AS glys,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'pl', signals.`value`, NULL)) AS pl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'wd', signals.`value`, NULL)) AS wd,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'wgdl', signals.`value`, NULL)) AS wgdl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'wggl', signals.`value`, NULL)) AS wggl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'ygdl', signals.`value`, NULL)) AS ygdl,
+        GROUP_CONCAT(IF(signals.signalsTypeID = 'yggl', signals.`value`, NULL)) AS yggl,
+        switch.`name` AS switchName,
+        collector.`name` AS collectorName,
+        switchtype.typeName AS signalsTypeName
         FROM
-            signals
+        signals PARTITION
+        <foreach item="item" index="index" collection="pp"
+                 open="(" separator="," close=")">
+            ${item}
+        </foreach>
+        INNER JOIN switch ON signals.switchID = switch.switchID
+        INNER JOIN collector ON switch.collectorID = collector.collectorID
+        INNER JOIN switchtype ON switch.switchType = switchtype.id
         WHERE
-            signals.switchID = #{switchID}
-            AND signals.time BETWEEN #{startTime}
-            AND #{endTime}
+        signals.switchID IN
+        <foreach item="item" index="index" collection="switchIds"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND signals.time BETWEEN #{startTime}
+        AND #{endTime}
         GROUP BY
-            signals.time
+        signals.time
+        ORDER BY
+        signals.switchID ASC
     </select>
 </mapper>

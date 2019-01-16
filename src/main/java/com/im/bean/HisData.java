@@ -15,17 +15,17 @@ public class HisData {
     private String collectorName;
     private Timestamp time;// 采集时间 yyyy-mm-dd hh:mm:ss
     private Long dataTime; //采集时间 ms
-    private Double ygdl;//有功电量
-    private Double wgdl;//无功电量
-    private Double yggl;//有功功率
-    private Double wggl;//无功功率
-    private Double glys;//功率因数
-    private Double dl;//电流
-    private Double dy;//电压
-    private Double pl;//频率
-    private Double wd;//温度
-    private Double dqywgdl;//当前月无功电量
-    private Double dqyygdl;//当前月有功电量
+    private String ygdl;//有功电量
+    private String wgdl;//无功电量
+    private String yggl;//有功功率
+    private String wggl;//无功功率
+    private String glys;//功率因数
+    private String dl;//电流
+    private String dy;//电压
+    private String pl;//频率
+    private String wd;//温度
+    private String dqywgdl;//当前月无功电量
+    private String dqyygdl;//当前月有功电量
 
     public String getSwitchID() {
         return switchID;
@@ -33,95 +33,6 @@ public class HisData {
 
     public void setSwitchID(String switchID) {
         this.switchID = switchID;
-    }
-
-    public String getSignalsID() {
-        return signalsID;
-    }
-
-    public void setSignalsID(String signalsID) {
-        this.signalsID = signalsID;
-    }
-
-    public String getCollectorId() {
-        return collectorId;
-    }
-
-    public void setCollectorId(String collectorId) {
-        this.collectorId = collectorId;
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
-
-    public Double getDqywgdl() {
-        return dqywgdl;
-    }
-
-    public void setDqywgdl(Double dqywgdl) {
-        this.dqywgdl = dqywgdl;
-    }
-
-    public Double getDqyygdl() {
-        return dqyygdl;
-    }
-
-    public void setDqyygdl(Double dqyygdl) {
-        this.dqyygdl = dqyygdl;
-    }
-
-    public Double getGlys() {
-        return glys;
-    }
-
-    public void setGlys(Double glys) {
-        this.glys = glys;
-    }
-
-    public Double getDl() {
-        return dl;
-    }
-
-    public void setDl(Double dl) {
-        this.dl = dl;
-    }
-
-    public Double getDy() {
-        return dy;
-    }
-
-    public void setDy(Double dy) {
-        this.dy = dy;
-    }
-
-    public Double getPl() {
-        return pl;
-    }
-
-    public void setPl(Double pl) {
-        this.pl = pl;
-    }
-
-    public Double getWd() {
-        return wd;
-    }
-
-    public void setWd(Double wd) {
-        this.wd = wd;
-    }
-
-
-    public Long getDataTime() {
-        return dataTime;
-    }
-
-    public void setDataTime(Long dataTime) {
-        this.dataTime = dataTime;
     }
 
     public String getSwitchName() {
@@ -132,12 +43,12 @@ public class HisData {
         this.switchName = switchName;
     }
 
-    public String getCollectorName() {
-        return collectorName;
+    public String getSignalsID() {
+        return signalsID;
     }
 
-    public void setCollectorName(String collectorName) {
-        this.collectorName = collectorName;
+    public void setSignalsID(String signalsID) {
+        this.signalsID = signalsID;
     }
 
     public String getSignalsTypeName() {
@@ -148,35 +59,123 @@ public class HisData {
         this.signalsTypeName = signalsTypeName;
     }
 
-    public Double getYgdl() {
+    public String getCollectorId() {
+        return collectorId;
+    }
+
+    public void setCollectorId(String collectorId) {
+        this.collectorId = collectorId;
+    }
+
+    public String getCollectorName() {
+        return collectorName;
+    }
+
+    public void setCollectorName(String collectorName) {
+        this.collectorName = collectorName;
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public Long getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(Long dataTime) {
+        this.dataTime = dataTime;
+    }
+
+    public String getYgdl() {
         return ygdl;
     }
 
-    public void setYgdl(Double ygdl) {
+    public void setYgdl(String ygdl) {
         this.ygdl = ygdl;
     }
 
-    public Double getWgdl() {
+    public String getWgdl() {
         return wgdl;
     }
 
-    public void setWgdl(Double wgdl) {
+    public void setWgdl(String wgdl) {
         this.wgdl = wgdl;
     }
 
-    public Double getYggl() {
+    public String getYggl() {
         return yggl;
     }
 
-    public void setYggl(Double yggl) {
+    public void setYggl(String yggl) {
         this.yggl = yggl;
     }
 
-    public Double getWggl() {
+    public String getWggl() {
         return wggl;
     }
 
-    public void setWggl(Double wggl) {
+    public void setWggl(String wggl) {
         this.wggl = wggl;
+    }
+
+    public String getGlys() {
+        return glys;
+    }
+
+    public void setGlys(String glys) {
+        this.glys = glys;
+    }
+
+    public String getDl() {
+        return dl;
+    }
+
+    public void setDl(String dl) {
+        this.dl = dl;
+    }
+
+    public String getDy() {
+        return dy;
+    }
+
+    public void setDy(String dy) {
+        this.dy = dy;
+    }
+
+    public String getPl() {
+        return pl;
+    }
+
+    public void setPl(String pl) {
+        this.pl = pl;
+    }
+
+    public String getWd() {
+        return wd;
+    }
+
+    public void setWd(String wd) {
+        this.wd = wd;
+    }
+
+    public String getDqywgdl() {
+        return dqywgdl;
+    }
+
+    public void setDqywgdl(String dqywgdl) {
+        this.dqywgdl = dqywgdl;
+    }
+
+    public String getDqyygdl() {
+        return dqyygdl;
+    }
+
+    public void setDqyygdl(String dqyygdl) {
+        this.dqyygdl = dqyygdl;
     }
 }

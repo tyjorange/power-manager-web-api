@@ -1,5 +1,6 @@
 package com.im.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.im.bean.HisData;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
@@ -35,7 +36,7 @@ public class SignalsController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/signal_his", method = RequestMethod.GET)
-    public RespResult getSignalHis(String param_1, String param_2, String startTime, String endTime) throws ParseException {
+    public RespResult getSignalHis(String param_1, String param_2, String startTime, String endTime, Integer page, Integer limit) throws ParseException {
         if (param_1 == null || param_2 == null || startTime == null || endTime == null) {
             return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
         }
@@ -46,8 +47,7 @@ public class SignalsController {
         String[] split_2 = param_2.split(",");
         List<String> switchIds = Arrays.asList(split_1);
         List<String> signalsType = Arrays.asList(split_2);
-        List<HisData> res = signalsService.findBySignalsTypesAndSwitchs(switchIds, signalsType, startTime, endTime);
-
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, res);
+        PageInfo<HisData> pageInfo = signalsService.findBySignalsTypesAndSwitchs(switchIds, signalsType, startTime, endTime, page, limit);
+        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, pageInfo.getList(), pageInfo.getTotal());
     }
 }

@@ -15,8 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Serializable;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class FuckDogApplicationTests {
 
 	@Autowired
@@ -24,11 +24,11 @@ public class FuckDogApplicationTests {
 	@Autowired
 	private ApexDayMapper apexDayMapper;
 
-	@Test
+//	@Test
 	public void gradeSubentry(){
 //		Double max = apexDayMapper.getMaxSum("201811110022","ygdl","2018-11-01","2018-12-31");
-		RespResult result = gradeSubentryService.gradeSubentry("","2018-11-01","2018-12-31",0);
-		System.out.print(result.getData().toString());
+//		RespResult result = gradeSubentryService.gradeSubentry("","2018-11-01","2018-12-31",0);
+//		System.out.print(result.getData().toString());
 	}
 
 }

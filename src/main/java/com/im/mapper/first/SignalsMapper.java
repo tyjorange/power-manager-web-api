@@ -10,5 +10,5 @@ import java.util.List;
 
 @Component
 public interface SignalsMapper extends MyMapper<Signals> {
-    List<HisData> getSignalsByTimeAndId(@Param("switchID") String switchID, @Param("startTime") String startTime, @Param("endTime") String endTime);
+    List<HisData> getSignalsByTimeAndSwitch(@Param("switchIds") List switchIds, @Param("pp") List pp, @Param("startTime") String startTime, @Param("endTime") String endTime);
 }
