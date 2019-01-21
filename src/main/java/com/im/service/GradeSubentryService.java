@@ -61,20 +61,26 @@ public class GradeSubentryService {
             collectors.add(collector);
         }
         if (collectors != null && collectors.size() != 0) {
+            String start = "";
+            String end = "";
             gradeSubentries = new ArrayList<GradeSubentry>();
             GradeSubentry gradeSubentry = null;
             for (Collector collector : collectors) {
-                if (timeType == 1) {    //按月查询
+                if (timeType == 0) {    //自定义查询
+                    start = startTime;
+                    end = endTime;
+                } else if (timeType == 1) {    //按月查询
                     String year = startTime.split("-")[0];
                     String month = startTime.split("-")[1];
-                    startTime = DateUtil.getFisrtDayOfMonth(year, month);
-                    endTime = DateUtil.getDateLastDay(year, month);
+                    start = DateUtil.getFisrtDayOfMonth(year, month);
+                    end = DateUtil.getDateLastDay(year, month);
                 } else if (timeType == 2) {  //按年查询
                     int year = Integer.parseInt(startTime);
-                    startTime = DateUtil.getYearFirst(year);
-                    endTime = DateUtil.getYearLast(year);
+                    start = DateUtil.getYearFirst(year);
+                    end = DateUtil.getYearLast(year);
                 }
-                gradeSubentry = signalHourMapper.gradeSubentry(startTime, endTime, collector.getCode());
+                gradeSubentry = signalHourMapper.gradeSubentry(start, end, collector.getCollectorid());
+                gradeSubentry.setComprehensive(gradeSubentry.mathComprehensive());
                 gradeSubentries.add(gradeSubentry);
             }
         }

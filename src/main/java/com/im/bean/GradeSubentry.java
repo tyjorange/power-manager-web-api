@@ -28,6 +28,33 @@ public class GradeSubentry {
 
     private Double comprehensive;   //综合能耗
 
+    public Double mathComprehensive() {
+        Double sum = 0.0;
+        if (this.power != null) {
+            sum += this.power;
+        }
+        if (this.lighting != null) {
+            sum += this.lighting;
+        }
+        if (this.airConditioner != null) {
+            sum += this.airConditioner;
+        }
+        if (this.airPressure != null) {
+            sum += this.airPressure;
+        }
+        if (this.elevator != null) {
+            sum += this.elevator;
+        }
+        if (this.live != null) {
+            sum += this.live;
+        }
+        if (this.special != null) {
+            sum += this.special;
+        }
+        this.comprehensive = 1.229 * sum;
+        return this.comprehensive;
+    }
+
     public String getCollectorName() {
         return collectorName;
     }

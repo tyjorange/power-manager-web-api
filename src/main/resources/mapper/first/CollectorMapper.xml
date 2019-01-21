@@ -4,7 +4,7 @@
 
   <select id="getUsedCollector" resultType="com.im.pojo.first.Collector">
     <![CDATA[
-        select c.* from collector c inner join switch s on c.code = s.collectorID group by c.code
+        select c.* from collector c inner join switch s on c.collectorID = s.collectorID group by c.code
      ]]>
   </select>
 

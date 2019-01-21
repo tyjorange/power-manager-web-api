@@ -25,7 +25,7 @@ public class GradeSubentryController {
     private CollectorService collectorService;
 
     @CrossOrigin
-    @PostMapping("/gradeSubentry")
+    @PostMapping("/statistics/gradeSubentry")
     public RespResult gradeSubentry(@RequestParam(value = "collectorID", required = false) String collectorID,
                                     @RequestParam(value = "startTime", required = false) String startTime,
                                     @RequestParam(value = "endTime", required = false) String endTime,

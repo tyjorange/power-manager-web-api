@@ -32,10 +32,10 @@ public class GradeTimeController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/gradeTimeStatistics")
-    public RespResult gradeTimeStatistics(@RequestParam(value = "switchID", required = false) String switchID,
+    @PostMapping(value = "/statistics/gradeTime")
+    public RespResult gradeTime(@RequestParam(value = "collectorID", required = false) String collectorID,
                                           @RequestParam(value = "time", required = false) String time,
                                           @RequestParam(value = "timeType", required = false) Integer timeType) throws ParseException {
-        return gradeTimeService.gradeTimeStatistics(switchID, time, timeType);
+        return gradeTimeService.gradeTime(collectorID, time, timeType);
     }
 }

@@ -7,24 +7,24 @@ import java.util.Map;
  * Created by tss on 2018/11/26.
  */
 public class GradeTime {
-    private String switchId;
-    private String switchName;
+    private String collectorName;   //集中器名称
+    private String collectorID;   //集中器ID
     private Map<String, Double> timeValue;
 
-    public String getSwitchId() {
-        return switchId;
+    public String getCollectorName() {
+        return collectorName;
     }
 
-    public void setSwitchId(String switchId) {
-        this.switchId = switchId;
+    public void setCollectorName(String collectorName) {
+        this.collectorName = collectorName;
     }
 
-    public String getSwitchName() {
-        return switchName;
+    public String getCollectorID() {
+        return collectorID;
     }
 
-    public void setSwitchName(String switchName) {
-        this.switchName = switchName;
+    public void setCollectorID(String collectorID) {
+        this.collectorID = collectorID;
     }
 
     public Map<String, Double> getTimeValue() {

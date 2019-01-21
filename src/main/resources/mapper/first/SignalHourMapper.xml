@@ -4,30 +4,46 @@
 
   <select id="gradeSubentry" resultType="com.im.bean.GradeSubentry" parameterType="java.lang.String">
     <![CDATA[
-      select  c.code as collectorCode,c.name as collectorName,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 1 and c.code = #{collectorID}) as power,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 2 and c.code = #{collectorID}) as lighting,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 3 and c.code = #{collectorID}) as airConditioner,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 4 and c.code = #{collectorID}) as airPressure,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 5 and c.code = #{collectorID}) as elevator,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 6 and c.code = #{collectorID}) as live,
-        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.code
-          inner join collector c on s.collectorID = c.code where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
-          and sh.time between #{startTime} and #{endTime} and s.switchType = 7 and c.code = #{collectorID}) as special
-        from collector c where c.code = #{collectorID}
+      select c.collectorID as collectorCode,c.name as collectorName,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 1 and c.collectorID = #{collectorID}) as power,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 2 and c.collectorID = #{collectorID}) as lighting,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 3 and c.collectorID = #{collectorID}) as airConditioner,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 4 and c.collectorID = #{collectorID}) as airPressure,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 5 and c.collectorID = #{collectorID}) as elevator,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 6 and c.collectorID = #{collectorID}) as live,
+        (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime} and s.switchType = 7 and c.collectorID = #{collectorID}) as special
+        from collector c where c.collectorID = #{collectorID}
      ]]>
+  </select>
+
+  <select id="getSignalDay" resultType="java.lang.Double" parameterType="java.lang.String">
+    <![CDATA[
+      select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time = #{queryTime} and c.collectorID = #{collectorID}
+    ]]>
+  </select>
+
+  <select id="getSignalMonth" resultType="java.lang.Double" parameterType="java.lang.String">
+    <![CDATA[
+      select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID
+          inner join collector c on s.collectorID = c.collectorID where (sh.signalsTypeID = 'ygdl' or sh.signalsTypeID = 'wgdl')
+          and sh.time between #{startTime} and #{endTime}  and c.collectorID = #{collectorID}
+    ]]>
   </select>
 
   <resultMap id="BaseResultMap" type="com.im.pojo.first.SignalHour" >
