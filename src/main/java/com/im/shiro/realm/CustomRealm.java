@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Set;
 
 /**
+ * 权限认证
  * Created by vostor on 2018/11/14.
  */
 public class CustomRealm extends AuthorizingRealm {

@@ -83,7 +83,7 @@ public class LoginController {
         map.put("name", principal);
         map.put("roles", roles);
         map.put("permissions", userRolePermissionsService.getPermissions(roles));
-        map.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        map.put("avatar", userRolePermissionsService.getAvatarByUsername(principal.toString()));
         logger.warn("token=[{}]", token);
         return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, map);
     }

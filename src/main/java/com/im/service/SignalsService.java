@@ -41,16 +41,16 @@ public class SignalsService {
         LocalDateTime t2 = getDateTimeOfTimestamp(Long.valueOf(endTime));
 
         List<String> pp = new ArrayList<>();
-        LocalDateTime temp = t1.plusDays(0);//copy
+        LocalDateTime temp = t1.plusDays(0);//copy a LocalDateTime object
         while (temp.isBefore(t2)) {
             pp.add("p" + (temp.getDayOfYear()));
             temp = temp.plusDays(1);
         }
         pp.add("p" + t2.getDayOfYear());
-        System.out.println(pp);
 
         String format1 = dateTimeFormatter.format(t1);
         String format2 = dateTimeFormatter.format(t2);
+        // 调用分页插件
         PageHelper.startPage(page, limit);
         PageInfo<HisData> pageInfo = new PageInfo<>(signalsMapper.getSignalsByTimeAndSwitch(switchIds, pp, format1, format2));
         pageInfo.getList().forEach(hisData -> hisData.setDataTime(hisData.getTime().getTime()));

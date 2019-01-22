@@ -30,6 +30,24 @@ public class UserRolePermissionsService {
     private PermissionsMapper permissionsMapper;
 
     /**
+     * 获取用户头像
+     *
+     * @param webUsername
+     * @return
+     */
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public String getAvatarByUsername(String webUsername) {
+        Example example = new Example(WebUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("webUserName", webUsername);
+        List<WebUser> webUsers = webUserMapper.selectByExample(example);
+        if (webUsers.size() == 0) {
+            throw new AuthenticationException();
+        }
+        return webUsers.get(0).getWebUserAvatar();
+    }
+
+    /**
      * 获取用户密码
      *
      * @param webUsername
