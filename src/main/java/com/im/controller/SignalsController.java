@@ -50,4 +50,30 @@ public class SignalsController {
         PageInfo<HisData> pageInfo = signalsService.findBySignalsTypesAndSwitchs(switchIds, signalsType, startTime, endTime, page, limit);
         return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, pageInfo.getList(), pageInfo.getTotal());
     }
+
+    /**
+     * 获取断路器by断路器id
+     *
+     * @param param_1
+     * @param param_2
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/get/point_used", method = RequestMethod.GET)
+    public RespResult getPointUsed(String param_1, String param_2, String startTime, String endTime) throws ParseException {
+        if (param_1 == null || param_2 == null || startTime == null || endTime == null) {
+            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
+        }
+        if (param_1.isEmpty() || param_2.isEmpty()) {
+            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_VALUE);
+        }
+//        String[] split_1 = param_1.split(",");
+//        String[] split_2 = param_2.split(",");
+//        List<String> switchIds = Arrays.asList(split_1);
+//        List<String> signalsType = Arrays.asList(split_2);
+//        PageInfo<HisData> pageInfo = signalsService.findBySignalsTypesAndSwitchs(switchIds, signalsType, startTime, endTime, page, limit);
+        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS);
+    }
 }
