@@ -1,6 +1,7 @@
 package com.im.controller;
 
 import com.im.bean.ElCascader;
+import com.im.bean.ElTree;
 import com.im.pojo.first.Collector;
 import com.im.pojo.first.Fsu;
 import com.im.resp.RespResult;
@@ -57,6 +58,43 @@ public class CollectorController {
             list_1.add(el_1);
         });
         return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, list_1);
+    }
+
+    /**
+     * 获取fus&集中器 树形结构
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/get/fsu/collectorTree", method = RequestMethod.GET)
+    public RespResult getCollectorTree() {
+        List<ElTree> list_1 = new ArrayList<>();
+        List<Fsu> fsus = fsuService.findAll();
+        fsus.forEach(fsu -> {
+            ElTree el_1 = new ElTree();
+            el_1.setId(fsu.getFsuid());
+            el_1.setLabel(fsu.getFsuname());
+            List<Collector> collectors = collectorService.findByFsuID(fsu.getFsuid());
+            List<ElTree> list_2 = new ArrayList<>();
+            collectors.forEach(collector -> {
+                ElTree el_2 = new ElTree();
+                el_2.setId(collector.getCollectorid());
+                el_2.setLabel(collector.getName());
+                list_2.add(el_2);
+            });
+            el_1.setChildren(list_2);
+            list_1.add(el_1);
+        });
+        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, list_1);
+    }
+
+    /**
+     * 获取所有集中器列表
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/get/collectors", method = RequestMethod.GET)
+    public RespResult getCollectors(){
+        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, collectorService.findAll());
     }
 
 }

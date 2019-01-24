@@ -1,7 +1,11 @@
 package com.im.service;
 
 import com.im.mapper.first.SwitchMapper;
+import com.im.pojo.first.Admin;
 import com.im.pojo.first.Switch;
+import com.im.resp.RespResult;
+import com.im.resp.RespResultEnum;
+import com.im.resp.RespResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -81,6 +85,48 @@ public class SwitchService {
         criteria.andEqualTo("collectorid", collectorID);
         List<Switch> switches = switchMapper.selectByExample(example);
         return switches;
+    }
+
+    /**
+     * 添加断路器信息
+     * @param _switch
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public RespResult saveSwitch(Switch _switch) {
+        int insert = switchMapper.insert(_switch);
+        if (insert == 0) {
+            return RespResultUtil.success(RespResultEnum.ADD_UPDATE_FAILED);
+        }
+        return RespResultUtil.success(RespResultEnum.ADD_UPDATE_SUCCESS, _switch);
+    }
+
+    /**
+     * 修改断路器信息
+     * @param _switch
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public RespResult updateSwitch(Switch _switch) {
+        int update = switchMapper.updateByPrimaryKeySelective(_switch);
+        if (update == 0) {
+            return RespResultUtil.success(RespResultEnum.ADD_UPDATE_FAILED);
+        }
+        return RespResultUtil.success(RespResultEnum.ADD_UPDATE_SUCCESS, _switch);
+    }
+
+    /**
+     * 删除断路器信息
+     * @param switchID
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public RespResult deleteSwitch(String switchID) {
+        int i = switchMapper.deleteByPrimaryKey(switchID);
+        if (i == 0) {
+            return RespResultUtil.success(RespResultEnum.DEL_FAILED);
+        }
+        return RespResultUtil.success(RespResultEnum.DEL_SUCCESS);
     }
 
 }
