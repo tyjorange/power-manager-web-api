@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.im.bean.HisData;
 import com.im.mapper.first.SignalsMapper;
+import com.im.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,8 +38,8 @@ public class SignalsService {
      */
     @Transactional(propagation = Propagation.SUPPORTS)
     public PageInfo<HisData> findBySignalsTypesAndSwitchs(List<String> switchIds, List<String> signalsType, String startTime, String endTime, Integer page, Integer limit) {
-        LocalDateTime t1 = getDateTimeOfTimestamp(Long.valueOf(startTime));
-        LocalDateTime t2 = getDateTimeOfTimestamp(Long.valueOf(endTime));
+        LocalDateTime t1 = DateUtil.getDateTimeOfTimestamp(Long.valueOf(startTime));
+        LocalDateTime t2 = DateUtil.getDateTimeOfTimestamp(Long.valueOf(endTime));
 
         List<String> pp = new ArrayList<>();
         LocalDateTime temp = t1.plusDays(0);//copy a LocalDateTime object
@@ -57,9 +58,4 @@ public class SignalsService {
         return pageInfo;
     }
 
-    private LocalDateTime getDateTimeOfTimestamp(long timestamp) {
-        Instant instant = Instant.ofEpochMilli(timestamp);
-        ZoneId zone = ZoneId.systemDefault();
-        return LocalDateTime.ofInstant(instant, zone);
-    }
 }

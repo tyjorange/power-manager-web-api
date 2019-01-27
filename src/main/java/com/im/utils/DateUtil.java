@@ -5,8 +5,10 @@ package com.im.utils;
  * Created by tss on 2018/11/26.
  */
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,10 +73,11 @@ public class DateUtil {
 
     /**
      * 获取某年第一天日期
+     *
      * @param year 年份
      * @return String
      */
-    public static String getYearFirst(int year){
+    public static String getYearFirst(int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(Calendar.YEAR, year);
@@ -85,10 +88,11 @@ public class DateUtil {
 
     /**
      * 获取某年最后一天日期
+     *
      * @param year 年份
      * @return String
      */
-    public static String getYearLast(int year){
+    public static String getYearLast(int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(Calendar.YEAR, year);
@@ -99,6 +103,17 @@ public class DateUtil {
         return format.format(currYearLast);
     }
 
+    /**
+     * 获取日期对象
+     *
+     * @param timestamp
+     * @return
+     */
+    public static LocalDateTime getDateTimeOfTimestamp(long timestamp) {
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        ZoneId zone = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant, zone);
+    }
 
     public static void main(String[] args) throws Exception {
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");

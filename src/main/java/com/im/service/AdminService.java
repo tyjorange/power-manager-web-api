@@ -83,7 +83,7 @@ public class AdminService {
     /**
      * 列表查询
      *
-     * @param admin      条件值
+     * @param admin    条件值
      * @param page     当前页
      * @param pageSize 每页条数
      * @return HTTP返回值封装对象

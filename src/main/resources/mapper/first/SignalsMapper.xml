@@ -53,4 +53,13 @@
         ORDER BY
         signals.switchID ASC
     </select>
+    <select id="getCalendarVar" resultType="java.lang.Double" parameterType="java.lang.String">
+        SELECT SUM(signals.`value`)
+        FROM
+            signals
+        WHERE
+            signals.time BETWEEN #{startTime}
+            AND #{endTime}
+            AND signals.signalsTypeID = 'ygdl'
+    </select>
 </mapper>

@@ -11,4 +11,6 @@ import java.util.List;
 @Component
 public interface SignalsMapper extends MyMapper<Signals> {
     List<HisData> getSignalsByTimeAndSwitch(@Param("switchIds") List switchIds, @Param("pp") List pp, @Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    Double getCalendarVar(@Param("startTime") String startTime, @Param("endTime") String endTime);
 }
