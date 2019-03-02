@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.im.mapper.first.SignalHourMapper" >
 
-  <select id="gradeSubentry" resultType="com.im.bean.GradeSubentry" parameterType="java.lang.String">
+  <select id="gradeSubentry" resultType="com.im.bean.viewobject.GradeSubentry" parameterType="java.lang.String">
     <![CDATA[
       select c.collectorID as collectorCode,c.name as collectorName,
         (select sum(statistik) from signal_hour sh inner join switch s on sh.switchID = s.switchID

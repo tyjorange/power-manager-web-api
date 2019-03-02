@@ -1,6 +1,6 @@
 package com.im.controller;
 
-import com.im.bean.RealData;
+import com.im.bean.viewobject.RealData;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;

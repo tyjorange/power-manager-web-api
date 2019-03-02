@@ -1,6 +1,6 @@
 package com.im.service;
 
-import com.im.bean.RealData;
+import com.im.bean.viewobject.RealData;
 import com.im.mapper.first.CollectorMapper;
 import com.im.mapper.first.SignalsNewMapper;
 import com.im.mapper.first.SignalstypeMapper;

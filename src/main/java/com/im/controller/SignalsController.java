@@ -1,7 +1,7 @@
 package com.im.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.im.bean.HisData;
+import com.im.bean.viewobject.HisData;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;
 import com.im.resp.RespResultUtil;

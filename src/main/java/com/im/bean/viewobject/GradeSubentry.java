@@ -1,6 +1,4 @@
-package com.im.bean;
-
-import com.fasterxml.jackson.databind.node.DoubleNode;
+package com.im.bean.viewobject;
 
 /**
  * 分级分项统计实体类

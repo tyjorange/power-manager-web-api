@@ -1,6 +1,6 @@
 package com.im.controller;
 
-import com.im.bean.SwitchBean;
+import com.im.bean.viewobject.SwitchBean;
 import com.im.pojo.first.Switch;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;

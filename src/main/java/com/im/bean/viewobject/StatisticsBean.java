@@ -1,4 +1,4 @@
-package com.im.bean;
+package com.im.bean.viewobject;
 
 import com.im.resp.RespTableCol;
 

@@ -1,6 +1,6 @@
 package com.im.mapper.first;
 
-import com.im.bean.HisData;
+import com.im.bean.viewobject.HisData;
 import com.im.pojo.first.Signals;
 import com.im.utils.MyMapper;
 import org.apache.ibatis.annotations.Param;

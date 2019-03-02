@@ -12,7 +12,7 @@
         <result column="value" property="value" jdbcType="DOUBLE"/>
     </resultMap>
 
-    <select id="getSignalsByTimeAndSwitch" resultType="com.im.bean.HisData" parameterType="java.lang.String">
+    <select id="getSignalsByTimeAndSwitch" resultType="com.im.bean.viewobject.HisData" parameterType="java.lang.String">
         SELECT
         signals.signalsID,
         signals.switchID,

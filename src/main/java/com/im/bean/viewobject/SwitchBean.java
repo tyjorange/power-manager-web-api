@@ -1,8 +1,7 @@
-package com.im.bean;
+package com.im.bean.viewobject;
 
 import com.im.pojo.first.Switch;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 /**

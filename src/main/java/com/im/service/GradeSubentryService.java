@@ -1,7 +1,7 @@
 package com.im.service;
 
-import com.im.bean.GradeSubentry;
-import com.im.bean.StatisticsBean;
+import com.im.bean.viewobject.GradeSubentry;
+import com.im.bean.viewobject.StatisticsBean;
 import com.im.mapper.first.ApexDayMapper;
 import com.im.mapper.first.ApexMonthMapper;
 import com.im.mapper.first.CollectorMapper;

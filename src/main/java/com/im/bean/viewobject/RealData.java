@@ -1,4 +1,4 @@
-package com.im.bean;
+package com.im.bean.viewobject;
 
 /**
  * 实时数据表.行数据-实体

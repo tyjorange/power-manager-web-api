@@ -1,6 +1,6 @@
 package com.im.service;
 
-import com.im.bean.dashboard.CalendarVar;
+import com.im.bean.viewobject.dashboard.CalendarVar;
 import com.im.mapper.first.SignalsMapper;
 import com.im.resp.RespResult;
 import com.im.resp.RespResultEnum;

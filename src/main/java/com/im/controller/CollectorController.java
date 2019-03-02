@@ -1,7 +1,7 @@
 package com.im.controller;
 
-import com.im.bean.ElCascader;
-import com.im.bean.ElTree;
+import com.im.bean.viewobject.ElCascader;
+import com.im.bean.viewobject.ElTree;
 import com.im.pojo.first.Collector;
 import com.im.pojo.first.Fsu;
 import com.im.resp.RespResult;

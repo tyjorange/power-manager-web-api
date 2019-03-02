@@ -1,4 +1,4 @@
-package com.im.bean;
+package com.im.bean.viewobject;
 
 import java.util.Map;
 

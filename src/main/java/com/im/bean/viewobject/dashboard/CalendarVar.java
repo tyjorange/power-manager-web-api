@@ -1,4 +1,4 @@
-package com.im.bean.dashboard;
+package com.im.bean.viewobject.dashboard;
 
 /**
  * 首页-日历数据
