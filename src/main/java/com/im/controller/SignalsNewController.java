@@ -1,9 +1,8 @@
 package com.im.controller;
 
 import com.im.bean.viewobject.RealData;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.service.SignalsNewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,12 +30,12 @@ public class SignalsNewController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/signal_news", method = RequestMethod.GET)
-    public RespResult getSignalNew(String param_1, String param_2) {
+    public ServerResponse getSignalNew(String param_1, String param_2) {
         if (param_1 == null || param_2 == null) {
-            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
+            return ServerResponse.success(ResponseCode.WRONG_PARAMETER_FORMAT);
         }
         if (param_1.isEmpty() || param_2.isEmpty()) {
-            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_VALUE);
+            return ServerResponse.success(ResponseCode.WRONG_PARAMETER_VALUE);
         }
         String[] split_1 = param_1.split(",");
         String[] split_2 = param_2.split(",");
@@ -44,6 +43,6 @@ public class SignalsNewController {
         List<String> signalsType = Arrays.asList(split_2);
         List<RealData> res = signalsNewService.findBySignalsNewTypesAndSwitchs(switchIds, signalsType);
 
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, res);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, res);
     }
 }

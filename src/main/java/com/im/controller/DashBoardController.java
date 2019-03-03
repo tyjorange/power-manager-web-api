@@ -1,6 +1,6 @@
 package com.im.controller;
 
-import com.im.resp.RespResult;
+import com.im.resp.ServerResponse;
 import com.im.service.DashBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class DashBoardController {
      * @return
      */
     @GetMapping(value = "/dashboard/calendarData")
-    public RespResult calendarData(String time) {
+    public ServerResponse calendarData(String time) {
         return dashBoardService.getCalendarData(time);
     }
 
@@ -26,7 +26,7 @@ public class DashBoardController {
      * @return
      */
     @GetMapping(value = "/dashboard/pieChartData")
-    public RespResult pieChartData(String time, String type) {
+    public ServerResponse pieChartData(String time, String type) {
         return dashBoardService.getPieChartData(time, type);
     }
 }

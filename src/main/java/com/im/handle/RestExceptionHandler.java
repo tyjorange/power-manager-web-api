@@ -2,9 +2,8 @@ package com.im.handle;
 
 import java.io.IOException;
 
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -38,91 +37,91 @@ public class RestExceptionHandler {
     //运行时异常
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
-    public RespResult runtimeExceptionHandler(RuntimeException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse runtimeExceptionHandler(RuntimeException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //空指针异常
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
-    public RespResult nullPointerExceptionHandler(NullPointerException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse nullPointerExceptionHandler(NullPointerException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //类型转换异常
     @ExceptionHandler(ClassCastException.class)
     @ResponseBody
-    public RespResult classCastExceptionHandler(ClassCastException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse classCastExceptionHandler(ClassCastException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //IO异常
     @ExceptionHandler(IOException.class)
     @ResponseBody
-    public RespResult iOExceptionHandler(IOException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse iOExceptionHandler(IOException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //未知方法异常
     @ExceptionHandler(NoSuchMethodException.class)
     @ResponseBody
-    public RespResult noSuchMethodExceptionHandler(NoSuchMethodException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse noSuchMethodExceptionHandler(NoSuchMethodException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //数组越界异常
     @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseBody
-    public RespResult indexOutOfBoundsExceptionHandler(IndexOutOfBoundsException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse indexOutOfBoundsExceptionHandler(IndexOutOfBoundsException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //400错误
     @ExceptionHandler({HttpMessageNotReadableException.class})
     @ResponseBody
-    public RespResult requestNotReadable(HttpMessageNotReadableException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse requestNotReadable(HttpMessageNotReadableException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //400错误
     @ExceptionHandler({TypeMismatchException.class})
     @ResponseBody
-    public RespResult requestTypeMismatch(TypeMismatchException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse requestTypeMismatch(TypeMismatchException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //400错误
     @ExceptionHandler({MissingServletRequestParameterException.class})
     @ResponseBody
-    public RespResult requestMissingServletRequest(MissingServletRequestParameterException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse requestMissingServletRequest(MissingServletRequestParameterException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //405错误
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     @ResponseBody
-    public RespResult request405(HttpRequestMethodNotSupportedException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse request405(HttpRequestMethodNotSupportedException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //406错误
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
     @ResponseBody
-    public RespResult request406(HttpMediaTypeNotAcceptableException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse request406(HttpMediaTypeNotAcceptableException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //500错误
     @ExceptionHandler({ConversionNotSupportedException.class, HttpMessageNotWritableException.class})
     @ResponseBody
-    public RespResult server500(RuntimeException ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse server500(RuntimeException ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     //其他异常
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public RespResult handle(Exception ex) {
-        return RespResultUtil.customError(RespResultEnum.INTERNAL_SERVER_ERROR, ex.getMessage());
+    public ServerResponse handle(Exception ex) {
+        return ServerResponse.customError(ResponseCode.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 }

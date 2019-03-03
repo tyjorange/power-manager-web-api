@@ -4,7 +4,7 @@ package com.im.resp;
  * 返回码
  * Created by vostor on 2018/10/26.
  */
-public enum RespResultEnum {
+public enum ResponseCode {
     QUERY_SUCCESS(0, "查询成功"),
     QUERY_FAILED(1, "查询失败"),
     EMPTY_RESULT(2, "无结果"),
@@ -26,19 +26,19 @@ public enum RespResultEnum {
     INTERNAL_SERVER_ERROR(500, "服务器内部错误");
 
     private Integer code;
-    private String msg;
+    private String desc;
 
-    RespResultEnum(Integer code, String msg) {
+    ResponseCode(Integer code, String desc) {
         this.code = code;
-        this.msg = msg;
+        this.desc = desc;
     }
 
     public Integer getCode() {
         return code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getDesc() {
+        return desc;
     }
 
 }

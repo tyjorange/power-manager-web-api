@@ -2,9 +2,8 @@ package com.im.controller;
 
 import com.im.bean.viewobject.SwitchBean;
 import com.im.pojo.first.Switch;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.service.CollectorService;
 import com.im.service.SwitchService;
 import org.slf4j.Logger;
@@ -37,7 +36,7 @@ public class SwitchController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/allSwitchs", method = RequestMethod.GET)
-    public RespResult getAllSwitchs() {
+    public ServerResponse getAllSwitchs() {
         List<Switch> list_1 = switchService.findAll();
         List<SwitchBean> switchBeans = new ArrayList<SwitchBean>();
         list_1.forEach(aSwitch -> switchBeans.add(new SwitchBean(aSwitch)));
@@ -45,7 +44,7 @@ public class SwitchController {
             bean.setCollectorName(collectorService.findByID(bean.getCollectorid()).getName());
             bean.setCollectorCode(collectorService.findByID(bean.getCollectorid()).getCode());
         });
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, switchBeans);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, switchBeans);
     }
 
     /**
@@ -55,26 +54,26 @@ public class SwitchController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/switchs", method = RequestMethod.GET)
-    public RespResult getSwitch(String collectorId) {
+    public ServerResponse getSwitch(String collectorId) {
         if (collectorId == null) {
-            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
+            return ServerResponse.success(ResponseCode.WRONG_PARAMETER_FORMAT);
         }
         if (collectorId.isEmpty()) {
-            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_VALUE);
+            return ServerResponse.success(ResponseCode.WRONG_PARAMETER_VALUE);
         }
         List<Switch> list_1 = switchService.findByCollectorID(collectorId);
         list_1.forEach(aSwitch -> aSwitch.setCollectorid(collectorService.findByID(aSwitch.getCollectorid()).getName()));
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, list_1);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, list_1);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/get/collector_switchs", method = RequestMethod.GET)
-    public RespResult getSwitchs(String collectorId) {
+    public ServerResponse getSwitchs(String collectorId) {
         if (collectorId == null) {
-            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_FORMAT);
+            return ServerResponse.success(ResponseCode.WRONG_PARAMETER_FORMAT);
         }
         if (collectorId.isEmpty()) {
-            return RespResultUtil.success(RespResultEnum.WRONG_PARAMETER_VALUE);
+            return ServerResponse.success(ResponseCode.WRONG_PARAMETER_VALUE);
         }
         List<SwitchBean> switchBeans = new ArrayList<SwitchBean>();
         List<Switch> list_1 = switchService.findByCollectorID(collectorId);
@@ -83,6 +82,6 @@ public class SwitchController {
             bean.setCollectorName(collectorService.findByID(bean.getCollectorid()).getName());
             bean.setCollectorCode(collectorService.findByID(bean.getCollectorid()).getCode());
         });
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, switchBeans);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, switchBeans);
     }
 }

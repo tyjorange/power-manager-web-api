@@ -4,9 +4,8 @@ import com.im.bean.viewobject.ElCascader;
 import com.im.bean.viewobject.ElTree;
 import com.im.pojo.first.Collector;
 import com.im.pojo.first.Fsu;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.service.CollectorService;
 import com.im.service.FsuService;
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ public class CollectorController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/fsu/collectors", method = RequestMethod.GET)
-    public RespResult getCollectorSwitch() {
+    public ServerResponse getCollectorSwitch() {
         List<ElCascader> list_1 = new ArrayList<>();
         List<Fsu> fsus = fsuService.findAll();
         fsus.forEach(fsu -> {
@@ -57,7 +56,7 @@ public class CollectorController {
             el_1.setChildren(list_2);
             list_1.add(el_1);
         });
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, list_1);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, list_1);
     }
 
     /**
@@ -66,7 +65,7 @@ public class CollectorController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/fsu/collectorTree", method = RequestMethod.GET)
-    public RespResult getCollectorTree() {
+    public ServerResponse getCollectorTree() {
         List<ElTree> list_1 = new ArrayList<>();
         List<Fsu> fsus = fsuService.findAll();
         fsus.forEach(fsu -> {
@@ -84,7 +83,7 @@ public class CollectorController {
             el_1.setChildren(list_2);
             list_1.add(el_1);
         });
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, list_1);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, list_1);
     }
 
     /**
@@ -93,8 +92,8 @@ public class CollectorController {
      */
     @CrossOrigin
     @RequestMapping(value = "/get/collectors", method = RequestMethod.GET)
-    public RespResult getCollectors(){
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, collectorService.findAll());
+    public ServerResponse getCollectors(){
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, collectorService.findAll());
     }
 
 }

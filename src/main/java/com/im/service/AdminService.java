@@ -4,9 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.im.mapper.first.AdminMapper;
 import com.im.pojo.first.Admin;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -28,12 +27,12 @@ public class AdminService {
      * @return
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public RespResult saveDog(Admin admin) {
+    public ServerResponse saveDog(Admin admin) {
         int insert = mapper.insert(admin);
         if (insert == 0) {
-            return RespResultUtil.success(RespResultEnum.ADD_UPDATE_FAILED);
+            return ServerResponse.success(ResponseCode.ADD_UPDATE_FAILED);
         }
-        return RespResultUtil.success(RespResultEnum.ADD_UPDATE_SUCCESS, admin);
+        return ServerResponse.success(ResponseCode.ADD_UPDATE_SUCCESS, admin);
     }
 
     /**
@@ -43,12 +42,12 @@ public class AdminService {
      * @return
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public RespResult updateDog(Admin admin) {
+    public ServerResponse updateDog(Admin admin) {
         int update = mapper.updateByPrimaryKeySelective(admin);
         if (update == 0) {
-            return RespResultUtil.success(RespResultEnum.ADD_UPDATE_FAILED);
+            return ServerResponse.success(ResponseCode.ADD_UPDATE_FAILED);
         }
-        return RespResultUtil.success(RespResultEnum.ADD_UPDATE_SUCCESS, admin);
+        return ServerResponse.success(ResponseCode.ADD_UPDATE_SUCCESS, admin);
     }
 
     /**
@@ -57,12 +56,12 @@ public class AdminService {
      * @param id
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public RespResult deleteDog(Integer id) {
+    public ServerResponse deleteDog(Integer id) {
         int i = mapper.deleteByPrimaryKey(id);
         if (i == 0) {
-            return RespResultUtil.success(RespResultEnum.DEL_FAILED);
+            return ServerResponse.success(ResponseCode.DEL_FAILED);
         }
-        return RespResultUtil.success(RespResultEnum.DEL_SUCCESS);
+        return ServerResponse.success(ResponseCode.DEL_SUCCESS);
     }
 
     /**
@@ -72,12 +71,12 @@ public class AdminService {
      * @return
      */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public RespResult queryDogById(Integer id) {
+    public ServerResponse queryDogById(Integer id) {
         Admin admin = mapper.selectByPrimaryKey(id);
         if (admin == null) {
-            return RespResultUtil.success(RespResultEnum.EMPTY_RESULT);
+            return ServerResponse.success(ResponseCode.EMPTY_RESULT);
         }
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, admin);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, admin);
     }
 
     /**
@@ -89,7 +88,7 @@ public class AdminService {
      * @return HTTP返回值封装对象
      */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public RespResult queryDogList(Admin admin, Integer page, Integer pageSize) {
+    public ServerResponse queryDogList(Admin admin, Integer page, Integer pageSize) {
         PageHelper.startPage(page, pageSize);
         Example example = new Example(Admin.class);
         Example.Criteria criteria = example.createCriteria();
@@ -100,9 +99,9 @@ public class AdminService {
         PageInfo<Admin> pageInfo = new PageInfo<>(mapper.selectByExample(example));
         long total = pageInfo.getTotal();
         if (total == 0) {
-            return RespResultUtil.success(RespResultEnum.EMPTY_RESULT);
+            return ServerResponse.success(ResponseCode.EMPTY_RESULT);
         }
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, pageInfo.getList(), total);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, pageInfo.getList(), total);
     }
 
     /**
@@ -112,12 +111,5 @@ public class AdminService {
      * @param id
      */
     public void judgeAge(Integer id) throws Exception {
-//        Admin dog = mapper.selectByPrimaryKey(id);
-//        Integer age = dog.getId();
-//        if (age < 10) {
-//            throw new CustomException(RespResultEnum.WRONG_PARAMETER_VALUE);
-//        } else if (age > 10 && age < 16) {
-//            throw new CustomException(RespResultEnum.WRONG_PARAMETER_FORMAT);
-//        }
     }
 }

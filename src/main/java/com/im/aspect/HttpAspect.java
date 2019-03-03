@@ -1,6 +1,6 @@
 package com.im.aspect;
 
-import com.im.resp.RespResult;
+import com.im.resp.ServerResponse;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -56,9 +56,9 @@ public class HttpAspect {
      */
     @AfterReturning(returning = "object", pointcut = "cutPoint()")
     private void doAfterReturning(Object object) {
-        if (object instanceof RespResult) {
+        if (object instanceof ServerResponse) {
             //获取请求后返回的内容
-            RespResult respResult = ((RespResult) object);
+            ServerResponse respResult = ((ServerResponse) object);
             logger.warn("Response=[{}]", respResult);
         }
     }

@@ -9,9 +9,8 @@ import com.im.mapper.first.SignalHourMapper;
 import com.im.pojo.first.ApexMonth;
 import com.im.pojo.first.Collector;
 import com.im.pojo.first.Switch;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.resp.RespTableCol;
 import com.im.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,7 @@ public class GradeSubentryService {
      * @return
      */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public RespResult gradeSubentry(String collectorID, String startTime, String endTime, Integer timeType) {
+    public ServerResponse gradeSubentry(String collectorID, String startTime, String endTime, Integer timeType) {
         List<Collector> collectors = new ArrayList<Collector>();
         List<GradeSubentry> gradeSubentries = null;
         if (collectorID == null || collectorID.isEmpty()) {
@@ -84,7 +83,7 @@ public class GradeSubentryService {
                 gradeSubentries.add(gradeSubentry);
             }
         }
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, gradeSubentries);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, gradeSubentries);
     }
 
     /**
@@ -97,7 +96,7 @@ public class GradeSubentryService {
      * @return
      */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public RespResult gradeSubentry1(String collectorID, String startTime, String endTime, Integer timeType) {
+    public ServerResponse gradeSubentry1(String collectorID, String startTime, String endTime, Integer timeType) {
         List<Switch> switches = null;
         StatisticsBean statisticsBean = new StatisticsBean();
         List<RespTableCol> cols = null;
@@ -120,7 +119,7 @@ public class GradeSubentryService {
                 cols.add(col);
                 if (timeType == 0) {  //自定义统计时间
                     if (startTime == null || startTime.isEmpty() || endTime == null || endTime.isEmpty()) {
-                        return RespResultUtil.success(RespResultEnum.EMPTY_RESULT);
+                        return ServerResponse.success(ResponseCode.EMPTY_RESULT);
                     } else {
                         // 查询时间段内该断路器的有功电量
                         ygdl = apexDayMapper.getMaxSum(_switch.getSwitchid(), "ygdl", startTime, endTime);
@@ -128,7 +127,7 @@ public class GradeSubentryService {
                     }
                 } else if (timeType == 1) {  //按月统计
                     if (startTime == null || startTime.isEmpty()) {
-                        return RespResultUtil.success(RespResultEnum.EMPTY_RESULT);
+                        return ServerResponse.success(ResponseCode.EMPTY_RESULT);
                     } else {
                         // 查询该月内该断路器的有功电量
                         Integer year = Integer.parseInt(startTime.split("-")[0]);
@@ -152,7 +151,7 @@ public class GradeSubentryService {
             statisticsBean.setCols(cols);
             statisticsBean.setDatas(datas);
         }
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, statisticsBean);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, statisticsBean);
     }
 
     /**

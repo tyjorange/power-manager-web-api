@@ -2,9 +2,8 @@ package com.im.service;
 
 import com.im.bean.viewobject.dashboard.CalendarVar;
 import com.im.mapper.first.SignalsMapper;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class DashBoardService {
      * @return
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public RespResult getCalendarData(String time) {
+    public ServerResponse getCalendarData(String time) {
         LocalDateTime t1 = DateUtil.getDateTimeOfTimestamp(Long.valueOf(time));
         String format1 = dateTimeFormatter.format(t1);
         Double dayVar = signalsMapper.getCalendarVar(format1 + HHMMSS_START, format1 + HHMMSS_END);
@@ -44,7 +43,7 @@ public class DashBoardService {
         CalendarVar calendarVar = new CalendarVar();
         calendarVar.setRydl(String.format("%.2f", dayVar));
         calendarVar.setYydl(String.format("%.2f", monthVar));
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, calendarVar);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, calendarVar);
     }
 
     /**
@@ -53,10 +52,10 @@ public class DashBoardService {
      * @return
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public RespResult getPieChartData(String time, String type) {
+    public ServerResponse getPieChartData(String time, String type) {
         LocalDateTime t1 = DateUtil.getDateTimeOfTimestamp(Long.valueOf(time));
         System.out.println(t1);
         System.out.println(type);
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS);
     }
 }

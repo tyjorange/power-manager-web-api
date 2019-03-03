@@ -1,9 +1,8 @@
 package com.im.controller;
 
 import com.im.pojo.first.Admin;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.service.UserRolePermissionsService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -40,10 +38,10 @@ public class LoginController {
      */
     @CrossOrigin
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
-    public RespResult ajaxLogin(@RequestBody @Valid Admin webUser, BindingResult bindingResult) {
+    public ServerResponse ajaxLogin(@RequestBody @Valid Admin webUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             String message = String.format("登陆失败，%s。", bindingResult.getFieldError().getDefaultMessage());
-            return RespResultUtil.customError(RespResultEnum.AUTH_FAILED, message);
+            return ServerResponse.customError(ResponseCode.AUTH_FAILED, message);
         }
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(webUser.getUsername(), webUser.getPassword());
@@ -51,17 +49,17 @@ public class LoginController {
             Serializable sessionsId = subject.getSession().getId();
             subject.login(token);
             logger.warn("Session=[{}] User=[{}] isLogin=[{}]", sessionsId, webUser.getUsername(), subject.isAuthenticated());
-            return RespResultUtil.success(RespResultEnum.AUTH_SUCCESS, null);
+            return ServerResponse.success(ResponseCode.AUTH_SUCCESS, null);
         } catch (IncorrectCredentialsException e) {
-            return RespResultUtil.success(RespResultEnum.AUTH_FAILED);
+            return ServerResponse.success(ResponseCode.AUTH_FAILED);
         } catch (LockedAccountException e) {
-            return RespResultUtil.success(RespResultEnum.AUTH_FAILED_USER_LOCK);
+            return ServerResponse.success(ResponseCode.AUTH_FAILED_USER_LOCK);
         } catch (AuthenticationException e) {
-            return RespResultUtil.success(RespResultEnum.AUTH_FAILED_NO_USER);
+            return ServerResponse.success(ResponseCode.AUTH_FAILED_NO_USER);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return RespResultUtil.success(RespResultEnum.AUTH_FAILED);
+        return ServerResponse.success(ResponseCode.AUTH_FAILED);
     }
 
     /**
@@ -72,11 +70,11 @@ public class LoginController {
      */
     @CrossOrigin
     @RequestMapping(value = "/auth/info", method = RequestMethod.GET)
-    public RespResult getInfo(@RequestParam(value = "token", required = false) String token) {
+    public ServerResponse getInfo(@RequestParam(value = "token", required = false) String token) {
         Subject subject = SecurityUtils.getSubject();
         Object principal = subject.getPrincipal();
         if (principal == null) {
-            return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED);
+            return ServerResponse.customError(ResponseCode.UNAUTHORIZED);
         }
         Set<String> roles = userRolePermissionsService.getRoles(principal.toString());
         HashMap<String, Object> map = new HashMap<>();
@@ -85,7 +83,7 @@ public class LoginController {
         map.put("permissions", userRolePermissionsService.getPermissions(roles));
         map.put("avatar", userRolePermissionsService.getAvatarByUsername(principal.toString()));
         logger.warn("token=[{}]", token);
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, map);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, map);
     }
 
     /**
@@ -96,13 +94,13 @@ public class LoginController {
      */
     @CrossOrigin
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)
-    public RespResult ajaxLogout(Admin webUser) {
+    public ServerResponse ajaxLogout(Admin webUser) {
         Subject subject = SecurityUtils.getSubject();
         Serializable sessionsId = subject.getSession().getId();
 //        UsernamePasswordToken token = new UsernamePasswordToken(webUser.getUserName(), webUser.getPassWord());
         subject.logout();
         logger.warn("Session=[{}] User=[{}] isLogin=[{}]", sessionsId, webUser.getUsername(), subject.isAuthenticated());
-        return RespResultUtil.success(RespResultEnum.OUT_SUCCESS, sessionsId);
+        return ServerResponse.success(ResponseCode.OUT_SUCCESS, sessionsId);
     }
 
 
@@ -113,8 +111,8 @@ public class LoginController {
      */
     @CrossOrigin
     @RequestMapping(value = "/un_auth", method = RequestMethod.GET)
-    public RespResult unAuth() {
-        return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED);
+    public ServerResponse unAuth() {
+        return ServerResponse.customError(ResponseCode.UNAUTHORIZED);
     }
 
     /**
@@ -124,7 +122,7 @@ public class LoginController {
      */
     @CrossOrigin
     @RequestMapping(value = "/auth/kickout", method = RequestMethod.GET)
-    public RespResult kickOut() {
-        return RespResultUtil.customError(RespResultEnum.UNAUTHORIZED);
+    public ServerResponse kickOut() {
+        return ServerResponse.customError(ResponseCode.UNAUTHORIZED);
     }
 }

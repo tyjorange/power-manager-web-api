@@ -5,9 +5,8 @@ import com.im.bean.viewobject.StatisticsBean;
 import com.im.mapper.first.CollectorMapper;
 import com.im.mapper.first.SignalHourMapper;
 import com.im.pojo.first.Collector;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.resp.RespTableCol;
 import com.im.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +42,9 @@ public class GradeTimeService {
      * @return HTTP返回值封装对象
      */
     @Transactional(propagation = Propagation.SUPPORTS)
-    public RespResult gradeTime(String collectorID, String time, Integer timeType) throws ParseException {
+    public ServerResponse gradeTime(String collectorID, String time, Integer timeType) throws ParseException {
         if (timeType != 2 && (time == null || time.isEmpty())) {
-            return RespResultUtil.success(RespResultEnum.EMPTY_RESULT);
+            return ServerResponse.success(ResponseCode.EMPTY_RESULT);
         }
         StatisticsBean statisticsBean = new StatisticsBean();   //统计实体类
         List<GradeTime> gradeTimes = new ArrayList<GradeTime>();    //分级分时统计实体列表
@@ -114,7 +113,7 @@ public class GradeTimeService {
             statisticsBean.setCols(cols);
             statisticsBean.setTableData(gradeTimes);
         }
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, statisticsBean);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, statisticsBean);
     }
 
 }

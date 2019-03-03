@@ -1,10 +1,9 @@
 package com.im.controller;
 
 import com.im.pojo.first.Admin;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.service.AdminService;
-import com.im.resp.RespResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +28,9 @@ public class DogController {
      * @return HTTP返回值封装对象
      */
     @GetMapping(value = "/query_dog")
-    public RespResult queryDog(Admin dog,
-                               @RequestParam(value = "page", required = false) Integer page,
-                               @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+    public ServerResponse queryDog(Admin dog,
+                                   @RequestParam(value = "page", required = false) Integer page,
+                                   @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         if (dog == null) {
             dog = new Admin();
         }
@@ -51,7 +50,7 @@ public class DogController {
      * @return
      */
     @GetMapping(value = "/query_dog/{id}")
-    public RespResult queryDogID(@PathVariable("id") Integer id) {
+    public ServerResponse queryDogID(@PathVariable("id") Integer id) {
         return adminService.queryDogById(id);
     }
 
@@ -64,9 +63,9 @@ public class DogController {
      * @return
      */
     @PostMapping(value = "/add_dog")
-    public RespResult addDog(@Valid Admin dog, BindingResult bindingResult) {
+    public ServerResponse addDog(@Valid Admin dog, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return RespResultUtil.customError(RespResultEnum.WRONG_PARAMETER_VALUE, bindingResult.getFieldError().getDefaultMessage());//TODO
+            return ServerResponse.customError(ResponseCode.WRONG_PARAMETER_VALUE, bindingResult.getFieldError().getDefaultMessage());//TODO
         }
         return adminService.saveDog(dog);
     }
@@ -80,7 +79,7 @@ public class DogController {
      * @return
      */
     @PutMapping(value = "/dog/{id}")
-    public RespResult updateOne(@PathVariable("id") String id, Admin dog) {
+    public ServerResponse updateOne(@PathVariable("id") String id, Admin dog) {
         dog.setId(id);
         return adminService.updateDog(dog);
     }
@@ -91,7 +90,7 @@ public class DogController {
      * @param id
      */
     @DeleteMapping(value = "/dog/{id}")
-    public RespResult deleteOne(@PathVariable("id") Integer id) {
+    public ServerResponse deleteOne(@PathVariable("id") Integer id) {
         return adminService.deleteDog(id);
     }
 

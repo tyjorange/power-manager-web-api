@@ -1,9 +1,8 @@
 package com.im.controller;
 
 import com.im.pojo.first.Switch;
-import com.im.resp.RespResult;
-import com.im.resp.RespResultEnum;
-import com.im.resp.RespResultUtil;
+import com.im.resp.ServerResponse;
+import com.im.resp.ResponseCode;
 import com.im.service.GradeTimeService;
 import com.im.service.SwitchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +25,16 @@ public class GradeTimeController {
 
     @CrossOrigin
     @GetMapping(value = "/getSignalNew")
-    public RespResult getSwitchs() {
+    public ServerResponse getSwitchs() {
         List<Switch> switches = switchService.findAll();
-        return RespResultUtil.success(RespResultEnum.QUERY_SUCCESS, switches);
+        return ServerResponse.success(ResponseCode.QUERY_SUCCESS, switches);
     }
 
     @CrossOrigin
     @PostMapping(value = "/statistics/gradeTime")
-    public RespResult gradeTime(@RequestParam(value = "collectorID", required = false) String collectorID,
-                                          @RequestParam(value = "time", required = false) String time,
-                                          @RequestParam(value = "timeType", required = false) Integer timeType) throws ParseException {
+    public ServerResponse gradeTime(@RequestParam(value = "collectorID", required = false) String collectorID,
+                                    @RequestParam(value = "time", required = false) String time,
+                                    @RequestParam(value = "timeType", required = false) Integer timeType) throws ParseException {
         return gradeTimeService.gradeTime(collectorID, time, timeType);
     }
 }

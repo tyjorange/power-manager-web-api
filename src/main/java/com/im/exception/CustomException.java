@@ -1,6 +1,6 @@
 package com.im.exception;
 
-import com.im.resp.RespResultEnum;
+import com.im.resp.ResponseCode;
 
 /**
  * 自定义异常
@@ -9,8 +9,8 @@ import com.im.resp.RespResultEnum;
 public class CustomException extends RuntimeException {
     private Integer code;
 
-    public CustomException(RespResultEnum resultEnum) {
-        super(resultEnum.getMsg());
+    public CustomException(ResponseCode resultEnum) {
+        super(resultEnum.getDesc());
         this.code = resultEnum.getCode();
     }
 
