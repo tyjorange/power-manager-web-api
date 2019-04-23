@@ -33,8 +33,9 @@ public class HttpAspect {
     private void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes att = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = att.getRequest();
+        String id = req.getSession().getId();
         //url method
-        logger.warn("URI=[{}] | Method=[{}]", req.getRequestURL(), req.getMethod());
+        logger.warn("Session=[{}] | URI=[{}] | Method=[{}]", id, req.getRequestURL(), req.getMethod());
         //ip
 //        logger.warn("ip={}", req.getRemoteAddr());
         //获取 类名.类方法

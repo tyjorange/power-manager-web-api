@@ -54,7 +54,7 @@ public class DashBoardService {
     @Transactional(propagation = Propagation.REQUIRED)
     public ServerResponse getPieChartData(String time, String type) {
         LocalDateTime t1 = DateUtil.getDateTimeOfTimestamp(Long.valueOf(time));
-        System.out.println(t1);
+        System.out.println("getDateTimeOfTimestamp " + t1);
         System.out.println(type);
         return ServerResponse.success(ResponseCode.QUERY_SUCCESS);
     }
